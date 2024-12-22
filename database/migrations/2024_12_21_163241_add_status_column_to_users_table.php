@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('is_admin')
+            $table->tinyInteger('status')
                 ->default(0)
-                ->after('password')
-                ->comment('custom user: 0, admin user: 1');
+                ->after('is_admin')
+                ->comment('0: Active, 1: Inactive');
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_admin');
+            $table->dropColumn('status');
         });
     }
 };

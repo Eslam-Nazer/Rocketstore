@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
             'email'                 => 'eslam@gmail.com',
             'email_verified_at'     => now(),
             'password'              => Hash::make('12345'),
-            'IsAdmin'               => 1,
+            'is_admin'               => 1,
         ]);
     }
 }

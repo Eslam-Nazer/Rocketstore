@@ -3,14 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    /**
+     * @use HasFactory<\Database\Factories\UserFactory>
+     * @use SoftDeletes<\Database\Eloquent\SoftDeletes>
+     */
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +26,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
+        'status',
     ];
 
     /**
@@ -44,5 +51,26 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Summary of getAmind
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getAminds(): Collection
+    {
+        return self::select('users.*')
+            ->where('is_admin', '=', 1)
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
+    /**
+     * Summary of getSingleAdmin
+     * @param int $id
+     */
+    public static function getSingleAdmin(int $id)
+    {
+        return self::where('id', '=', $id)->firstOrFail();
     }
 }
