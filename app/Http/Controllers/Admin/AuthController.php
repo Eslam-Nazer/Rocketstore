@@ -33,7 +33,8 @@ class AuthController extends Controller
         if (Auth::attempt([
             'email'     => $request->email,
             'password'  => $request->password,
-            'is_admin'   => 1
+            'is_admin'  => 1,
+            'status'    => 0,
         ], $remember)) {
             return redirect()->route('admin-dashboard');
         }

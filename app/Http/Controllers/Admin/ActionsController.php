@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Jobs\Admin\InsertAdminJob;
-use App\Http\Controllers\Controller;
 use App\Jobs\Admin\DeleteAdminJob;
+use App\Jobs\Admin\InsertAdminJob;
 use App\Jobs\Admin\UpdateAdminJob;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Admin\AdminInfoRequest;
+use App\Http\Requests\Admin\AdminEdtingRequest;
 
 class ActionsController extends Controller
 {
     /**
      * Summary of insertAdmin
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\Admin\AdminInfoRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function insertAdmin(Request $request): RedirectResponse
+    public function insertAdmin(AdminInfoRequest $request): RedirectResponse
     {
-        InsertAdminJob::dispatch($request->all());
+        // dd($request->validated());
+        InsertAdminJob::dispatch($request->validated());
         return redirect()->route('admin-list')
             ->with('success', 'Admin successfully inserted');
     }
@@ -26,10 +28,10 @@ class ActionsController extends Controller
     /**
      * Summary of updateAdmin
      * @param int $id
-     * @param \Illuminate\Http\Request $request
-     * @return RedirectResponse
+     * @param \App\Http\Requests\Admin\AdminEdtingRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateAdmin(int $id, Request $request): RedirectResponse
+    public function updateAdmin(int $id, AdminEdtingRequest $request): RedirectResponse
     {
         UpdateAdminJob::dispatch($request->all(), $id);
         return redirect()->route('admin-list')

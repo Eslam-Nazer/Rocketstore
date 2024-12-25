@@ -36,22 +36,26 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="forName">Name</label>
-                                    <input name="name" type="text" class="form-control" id="forName" placeholder="Enter Name">
+                                    <input name="name" value="{{ old('name') }}" type="text" class="form-control" id="forName" placeholder="Enter Name">
+                                    <div class="text-danger">{{ $errors->first('name') }}</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="forEmail">Email address</label>
-                                    <input name="email" type="email" class="form-control" id="forEmail" placeholder="Enter email">
+                                    <input name="email" value="{{ old('email') }}" type="email" class="form-control" id="forEmail" placeholder="Enter email">
+                                    <div class="text-danger">{{ $errors->first('email') }}</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="forPassword">Password</label>
                                     <input name="password" type="password" class="form-control" id="forPassword" placeholder="Password">
+                                    <div class="text-danger">{{ $errors->first('password') }}</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="forStatus">Status</label>
                                     <select name="status" class="form-control" id="forStatus">
-                                        <option value="0">Active</option>
-                                        <option value="1">Inactive</option>
+                                        <option {{ old('status') == 0 ? 'selected' : '' }} value="0">Active</option>
+                                        <option {{ old('status') == 1 ? 'selected' : '' }} value="1">Inactive</option>
                                     </select>
+                                    <div class="text-danger">{{ $errors->first('status') }}</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">File input</label>

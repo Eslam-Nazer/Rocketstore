@@ -36,16 +36,19 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="forName">Name</label>
-                                    <input name="name" value="{{ $admin->name }}" type="text" class="form-control" id="forName" placeholder="Enter Name">
+                                    <input name="name" value="{{ old('name', $admin->name) }}" type="text" class="form-control" id="forName" placeholder="Enter Name">
+                                    <div class="text-danger">{{ $errors->first('name') }}</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="forEmail">Email address</label>
-                                    <input name="email" value="{{ $admin->email }}" type="email" class="form-control" id="forEmail" placeholder="Enter email">
+                                    <input name="email" value="{{ old('email' ,$admin->email) }}" type="email" class="form-control" id="forEmail" placeholder="Enter email">
+                                    <div class="text-danger">{{ $errors->first('email') }}</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="forPassword">Password</label>
                                     <input name="password" type="password" class="form-control" id="forPassword" placeholder="Password">
                                     <p>If you want to chabge password enter it</p>
+                                    <div class="text-danger">{{ $errors->first('password') }}</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="forStatus">Status</label>
@@ -53,6 +56,7 @@
                                         <option {{ $admin->status == 0 ? 'selected' : "" }} value="0">Active</option>
                                         <option {{ $admin->status == 1 ? 'selected' : "" }} value="1">Inactive</option>
                                     </select>
+                                    <div class="text-danger">{{ $errors->first('status') }}</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">File input</label>
