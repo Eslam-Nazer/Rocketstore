@@ -8,7 +8,7 @@ use App\Jobs\Admin\UpdateAdminJob;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Admin\AdminInfoRequest;
-use App\Http\Requests\Admin\AdminEdtingRequest;
+use App\Http\Requests\Admin\AdminEditingRequest;
 
 class ActionsController extends Controller
 {
@@ -28,10 +28,10 @@ class ActionsController extends Controller
     /**
      * Summary of updateAdmin
      * @param int $id
-     * @param \App\Http\Requests\Admin\AdminEdtingRequest $request
+     * @param \App\Http\Requests\Admin\AdminEditingRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateAdmin(int $id, AdminEdtingRequest $request): RedirectResponse
+    public function updateAdmin(int $id, AdminEditingRequest $request): RedirectResponse
     {
         UpdateAdminJob::dispatch($request->all(), $id);
         return redirect()->route('admin-list')

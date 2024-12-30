@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -51,6 +52,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Summary of category
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'created_by', 'id');
     }
 
     /**
