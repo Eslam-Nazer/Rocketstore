@@ -174,6 +174,15 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="{{ route('sub_category-list') }}" class="nav-link @if(Request::segment(2) == 'sub-category') active @endif">
+                                <i class="nav-icon fas fa-list-alt"></i>
+                                <p>
+                                    SubCategory
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>

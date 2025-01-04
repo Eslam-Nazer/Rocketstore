@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\LayoutController;
 use App\Http\Controllers\Admin\ActionsController;
 use App\Http\Controllers\Admin\Category\CategoryActionsController;
 use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\SubCategory\SubCategoryActionsController;
+use App\Http\Controllers\Admin\SubCategory\SubCategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,4 +38,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/category/edit/{id}', [CategoryController::class, 'editCategory'])->name('edit-category');
     Route::post('/admin/category/edit/{id}', [CategoryActionsController::class, 'updateCategory'])->name('update-category');
     Route::get('/admin/category/delete/{id}', [CategoryActionsController::class, 'deleteCategory'])->name('delete-category');
+    // SubCategory
+    Route::get('/admin/sub-category', [SubCategoryController::class, 'subCategoryList'])->name('sub_category-list');
+    Route::get('/admin/sub-category/list', [SubCategoryController::class, 'subCategoryList'])->name('sub_category-list');
+    Route::get('/admin/sub-category/add', [SubCategoryController::class, 'addSubCategory'])->name('add-sub_category-layout');
+    Route::post('/admin/sub-category/add', [SubCategoryActionsController::class, 'insertSubCategory'])->name('add-sub_category');
+    Route::get('/admin/sub-category/edit/{id}', [SubCategoryController::class, 'editSubCategory'])->name('edit-sub_category-layout');
+    Route::post('/admin/sub-category/edit/{id}', [SubCategoryActionsController::class, 'updateSubCategory'])->name('edit-sub_category');
+    Route::get('/admin/sub-category/delete/{id}', [SubCategoryActionsController::class, 'deleteSubCategory'])->name('delete-sub_category');
 });

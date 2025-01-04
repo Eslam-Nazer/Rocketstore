@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\SubCategory;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
@@ -43,6 +45,15 @@ class Category extends Model
     public function createdByUser(): HasMany
     {
         return $this->hasMany(User::class, 'created_by');
+    }
+
+    /**
+     * Summary of subCategory
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subCategory(): BelongsTo
+    {
+        return $this->belongsTo(SubCategory::class, 'category_id', 'id');
     }
 
     /**
