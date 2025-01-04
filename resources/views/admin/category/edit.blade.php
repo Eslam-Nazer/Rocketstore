@@ -47,8 +47,8 @@
                                 <div class="form-group">
                                     <label for="forStatus">Status <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control" id="forStatus">
-                                        <option {{ $category->status == 0 ? 'selected' : '' }} value="0">Active</option>
-                                        <option {{ $category->status == 1 ? 'selected' : '' }} value="1">Inactive</option>
+                                        <option {{ $category->status == "0" ? 'selected' : '' }} value="0">Active</option>
+                                        <option {{ $category->status == "1" ? 'selected' : '' }} value="1">Inactive</option>
                                     </select>
                                     <div class="text-danger">{{ $errors->first('status') }}</div>
                                 </div>
