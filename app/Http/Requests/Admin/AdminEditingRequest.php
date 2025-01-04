@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enum\StatusEnum;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminEditingRequest extends FormRequest
@@ -24,8 +26,11 @@ class AdminEditingRequest extends FormRequest
         $userId = $this->route('id');
         return [
             'name'          => 'required|string',
-            'email'         => 'required|email|unique:users,email,' . $userId,
-            'status'        => 'required|integer'
+            'email'         => "required|email|unique:users,email,{$userId}",
+            'status'        => [
+                'required',
+                Rule::in(array_column(StatusEnum::cases(), 'value'))
+            ]
         ];
     }
 }

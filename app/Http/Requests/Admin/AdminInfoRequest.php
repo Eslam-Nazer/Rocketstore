@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enum\StatusEnum;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminInfoRequest extends FormRequest
@@ -25,7 +27,10 @@ class AdminInfoRequest extends FormRequest
             'name'      => 'required|string',
             'email'     => 'required|email|unique:users,email',
             'password'  => 'required',
-            'status'    => 'required|integer|between:0,1'
+            'status'    => [
+                'required',
+                Rule::in(array_column(StatusEnum::cases(), 'value')),
+            ]
         ];
     }
 }

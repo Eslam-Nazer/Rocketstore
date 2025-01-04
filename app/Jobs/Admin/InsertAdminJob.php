@@ -25,14 +25,13 @@ class InsertAdminJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $is_admin = 1;
-        $status = (int) $this->request['status'];
+        $is_admin = '1';
         User::create([
-            'name'          => $this->request['name'],
-            'email'         => $this->request['email'],
+            'name'          => trim($this->request['name']),
+            'email'         => trim($this->request['email']),
             'password'      => Hash::make($this->request['password']),
             'is_admin'       => $is_admin,
-            'status'        => $status,
+            'status'        => $this->request['status'],
             'created_at'    => now()
         ]);
     }

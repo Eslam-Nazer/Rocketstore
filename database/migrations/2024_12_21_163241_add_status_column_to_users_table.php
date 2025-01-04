@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('status')
-                ->default(0)
+            $table->enum('status', ["0", "1"])
+                ->comment('[0]: Active, [1]: Inactive')
+                ->default("0")
                 ->after('is_admin')
                 ->comment('0: Active, 1: Inactive');
         });
