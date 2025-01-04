@@ -26,13 +26,13 @@ class UpdateAdminJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $admin = User::find($this->id);
-        $admin->name = $this->request['name'];
-        $admin->email = $this->request['email'];
+        $admin          = User::find($this->id);
+        $admin->name    = trim($this->request['name']);
+        $admin->email   = trim($this->request['email']);
         if (!empty($this->request['password']) && $this->request['password'] !== null) {
             $admin->password = $this->request['password'];
         }
-        $admin->status = (int) $this->request['status'];
+        $admin->status  = $this->request['status'];
         $admin->save();
     }
 }

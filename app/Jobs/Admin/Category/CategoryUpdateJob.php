@@ -3,8 +3,9 @@
 namespace App\Jobs\Admin\Category;
 
 use App\Models\Category;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CategoryUpdateJob implements ShouldQueue
 {
@@ -25,12 +26,13 @@ class CategoryUpdateJob implements ShouldQueue
     {
         Category::where('id', '=', $this->id)
             ->update([
-                'name'              => $this->request['name'],
-                'slug'              => $this->request['slug'],
-                'status'            => $this->request['status'],
-                'meta_title'        => $this->request['meta_title'],
-                'meta_description'  => $this->request['meta_description'],
-                'meta_keywords'     => $this->request['meta_keywords']
+                'name'              => trim($this->request['name']),
+                'slug'              => trim($this->request['slug']),
+                'status'            => trim($this->request['status']),
+                'meta_title'        => trim($this->request['meta_title']),
+                'meta_description'  => trim($this->request['meta_description']),
+                'meta_keywords'     => trim($this->request['meta_keywords']),
+                'created_by'        => Auth::user()->id
             ]);
     }
 }
