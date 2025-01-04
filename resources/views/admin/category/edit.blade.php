@@ -70,7 +70,7 @@
                                     <div class="text-danger">{{ $errors->first('meta_title') }}</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="forMetaDescription">Slug</label>
+                                    <label for="forMetaDescription">Meta Description</label>
                                     <textarea name="meta_description" type="text" class="form-control" id="forMetaDescription" placeholder="Enter meta description" style="height: 150px;">{{ old('meta_description', $category->meta_description) }}</textarea>
                                     <div class="text-danger">{{ $errors->first('meta_description') }}</div>
                                 </div>
