@@ -11,7 +11,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add New Category</h1>
+                    <h1>Edit Sub Category</h1>
                 </div>
 
             </div>
@@ -27,7 +27,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">New Sub Category</h3>
+                            <h3 class="card-title">Edit Sub Category</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -43,7 +43,9 @@
                                     <label for="forCategory">Category <span class="text-danger">*</span></label>
                                     <select name="category" class="form-control" id="forCategory">
                                         @foreach ($categories as $category)
+                                        @if ($category->status == '0')
                                         <option {{ old('category', $sub_category->category_id) == $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{$category->name}}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                     <div class="text-danger">{{ $errors->first('category') }}</div>
@@ -56,8 +58,8 @@
                                 <div class="form-group">
                                     <label for="forStatus">Status <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control" id="forStatus">
-                                        <option {{ old('status', $sub_category->statu) == 0 ? 'selected' : '' }} value="0">Active</option>
-                                        <option {{ old('status', $sub_category->statu) == 1 ? 'selected' : '' }} value="1">Inactive</option>
+                                        <option {{ old('status', $sub_category->status) == "0" ? 'selected' : '' }} value="0">Active</option>
+                                        <option {{ old('status', $sub_category->status) == "1" ? 'selected' : '' }} value="1">Inactive</option>
                                     </select>
                                     <div class="text-danger">{{ $errors->first('status') }}</div>
                                 </div>

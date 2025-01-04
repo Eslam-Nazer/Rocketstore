@@ -11,9 +11,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add New Category</h1>
+                    <h1>Add New Sub Category</h1>
                 </div>
-
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -43,7 +42,9 @@
                                     <label for="forCategory">Category <span class="text-danger">*</span></label>
                                     <select name="category" class="form-control" id="forCategory">
                                         @foreach ($categories as $category)
+                                        @if ($category->status == '0')
                                         <option {{ old('category') == $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{$category->name}}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                     <div class="text-danger">{{ $errors->first('category') }}</div>
@@ -90,7 +91,6 @@
                                 </div>
                             </div>
                             <!-- /.card-body -->
-
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
