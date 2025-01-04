@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -57,6 +58,15 @@ class Category extends Model
     }
 
     /**
+     * Summary of product
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'category_id', 'id');
+    }
+
+    /**
      * Summary of getCategories
      * @return \Illuminate\Support\Collection
      */
@@ -70,9 +80,8 @@ class Category extends Model
 
     public static function getCategory(int $id)
     {
-        return self::select('categories.*', 'users.name as creator_name')
+        return self::select('categories.*')
             ->where('categories.id', '=', $id)
-            ->join('users', 'users.id', '=', 'categories.id')
-            ->first();
+            ->firstOrFail();
     }
 }

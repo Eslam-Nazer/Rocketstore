@@ -64,9 +64,22 @@ class User extends Authenticatable
         return $this->belongsTo(Category::class, 'created_by', 'id');
     }
 
+    /**
+     * Summary of subCategory
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function subCategory(): BelongsTo
     {
         return $this->belongsTo(SubCategory::class, 'created_by', 'id');
+    }
+
+    /**
+     * Summary of product
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'created_by', 'id');
     }
 
     /**
@@ -76,7 +89,7 @@ class User extends Authenticatable
     public static function getAminds(): Collection
     {
         return self::select('users.*')
-            ->where('is_admin', '=', 1)
+            ->where('is_admin', '=', '1')
             ->orderBy('id', 'desc')
             ->get();
     }
