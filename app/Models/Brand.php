@@ -23,6 +23,10 @@ class Brand extends Model
      */
     protected $table = 'brands';
 
+    /**
+     * Summary of fillable
+     * @var array<string>
+     */
     protected $fillable = [
         'name',
         'slug',
