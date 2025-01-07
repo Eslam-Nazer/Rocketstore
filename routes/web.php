@@ -4,10 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\LayoutController;
 use App\Http\Controllers\Admin\ActionsController;
-use App\Http\Controllers\Admin\Category\CategoryActionsController;
+use App\Http\Controllers\Admin\Brand\BrandController;
+use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Category\CategoryController;
-use App\Http\Controllers\Admin\SubCategory\SubCategoryActionsController;
+use App\Http\Controllers\Admin\Brand\BrandActionsController;
+use App\Http\Controllers\Admin\Product\ProductActionsController;
 use App\Http\Controllers\Admin\SubCategory\SubCategoryController;
+use App\Http\Controllers\Admin\Category\CategoryActionsController;
+use App\Http\Controllers\Admin\SubCategory\SubCategoryActionsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,4 +50,20 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/sub-category/edit/{id}', [SubCategoryController::class, 'editSubCategory'])->name('edit-sub_category-layout');
     Route::post('/admin/sub-category/edit/{id}', [SubCategoryActionsController::class, 'updateSubCategory'])->name('edit-sub_category');
     Route::get('/admin/sub-category/delete/{id}', [SubCategoryActionsController::class, 'deleteSubCategory'])->name('delete-sub_category');
+    // Brands
+    Route::get('/admin/brands', [BrandController::class, 'brandList'])->name('brand-list');
+    Route::get('/admin/brands/list', [BrandController::class, 'brandList'])->name('brand-list');
+    Route::get('/admin/brands/add', [BrandController::class, 'addBrand'])->name('add-brand');
+    Route::post('/admin/brands/add', [BrandActionsController::class, 'insertBrand'])->name('insert-brand');
+    Route::get('/admin/brands/edit/{id}', [BrandController::class, 'editBrand'])->name('edit-brand');
+    Route::post('/admin/brands/edit/{id}', [BrandActionsController::class, 'updateBrand'])->name('update-brand');
+    Route::get('/admin/brands/delete/{id}', [BrandActionsController::class, 'deleteBrand'])->name('delete-brand');
+    // Products
+    // Route::get('/admin/products', [ProductController::class, 'productList'])->name('products-list');
+    // Route::get('/admin/products/list', [ProductController::class, 'productList'])->name('products-list');
+    // Route::get('/admin/products/add', [ProductController::class, 'addProduct'])->name('add-product-layout');
+    // Route::post('/admin/products/add', [ProductActionsController::class, 'insertProduct'])->name('add-product');
+    // Route::get('/admin/products/edit/{id}', [ProductController::class, 'editProduct'])->name('edit-product-layout');
+    // Route::post('/admin/products/edit/{id}', [ProductActionsController::class, 'updateProduct'])->name('edit-product');
+    // Route::get('/admin/products/delete/{id}', [ProductActionsController::class, 'deleteProduct'])->name('delete-product');
 });

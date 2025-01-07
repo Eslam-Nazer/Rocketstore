@@ -175,9 +175,27 @@
 
                         <li class="nav-item">
                             <a href="{{ route('sub_category-list') }}" class="nav-link @if(Request::segment(2) == 'sub-category') active @endif">
-                                <i class="nav-icon fas fa-list-alt"></i>
+                                <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     SubCategory
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('brand-list') }}" class="nav-link @if(Request::segment(2) == 'brands') active @endif">
+                                <i class="nav-icon fas fa-shopping-bag"></i>
+                                <p>
+                                    Brand
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('products-list') }}" class="nav-link @if(Request::segment(2) == 'products') active @endif">
+                                <i class="nav-icon fab fa-product-hunt"></i>
+                                <p>
+                                    Products
                                 </p>
                             </a>
                         </li>
