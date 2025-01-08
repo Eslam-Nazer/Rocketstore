@@ -5,9 +5,11 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\LayoutController;
 use App\Http\Controllers\Admin\ActionsController;
 use App\Http\Controllers\Admin\Brand\BrandController;
+use App\Http\Controllers\Admin\Color\ColorController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Brand\BrandActionsController;
+use App\Http\Controllers\Admin\Color\ColorActionsController;
 use App\Http\Controllers\Admin\Product\ProductActionsController;
 use App\Http\Controllers\Admin\SubCategory\SubCategoryController;
 use App\Http\Controllers\Admin\Category\CategoryActionsController;
@@ -58,6 +60,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/brands/edit/{id}', [BrandController::class, 'editBrand'])->name('edit-brand');
     Route::post('/admin/brands/edit/{id}', [BrandActionsController::class, 'updateBrand'])->name('update-brand');
     Route::get('/admin/brands/delete/{id}', [BrandActionsController::class, 'deleteBrand'])->name('delete-brand');
+    //Colors
+    Route::get('/admin/colors', [ColorController::class, 'colorList'])->name('color-list');
+    Route::get('/admin/colors/list', [ColorController::class, 'colorList'])->name('color-list');
+    Route::get('/admin/colors/add', [ColorController::class, 'addColor'])->name('add-color');
+    Route::post('/admin/colors/add', [ColorActionsController::class, 'insertColor'])->name('insert-color');
+    Route::get('/admin/colors/edit/{id}', [ColorController::class, 'editColor'])->name('edit-color');
+    Route::post('/admin/colors/edit/{id}', [ColorActionsController::class, 'updateColor'])->name('update-color');
+    Route::get('/admin/colors/delete/{id}', [ColorActionsController::class, 'deleteColor'])->name('delete-color');
     // Products
     // Route::get('/admin/products', [ProductController::class, 'productList'])->name('products-list');
     // Route::get('/admin/products/list', [ProductController::class, 'productList'])->name('products-list');

@@ -192,6 +192,15 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="{{ route('color-list') }}" class="nav-link @if(Request::segment(2) == 'colors') active @endif">
+                                <i class="nav-icon fas fa-palette"></i>
+                                <p>
+                                    Color
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="{{ route('products-list') }}" class="nav-link @if(Request::segment(2) == 'products') active @endif">
                                 <i class="nav-icon fab fa-product-hunt"></i>
                                 <p>
