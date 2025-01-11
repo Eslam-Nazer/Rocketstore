@@ -37,16 +37,16 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">#</th>
-                                        <th class="text-center">Sub Category Name</th>
-                                        <th class="text-center">Category Name</th>
-                                        <th class="text-center">Slug</th>
-                                        <th class="text-center">Meta Title</th>
-                                        <th class="text-center">Meta Description</th>
-                                        <th class="text-center">Meta Keyword</th>
-                                        <th class="text-center">Creator</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">Created at</th>
-                                        <th style="width: 150px;text-align:center">Actions</th>
+                                        <th>Sub Category Name</th>
+                                        <th>Category Name</th>
+                                        <th>Slug</th>
+                                        <th>Meta Title</th>
+                                        <th>Meta Description</th>
+                                        <th>Meta Keyword</th>
+                                        <th>Creator</th>
+                                        <th>Status</th>
+                                        <!-- <th>Created at</th> -->
+                                        <th style="width: 150px">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,10 +61,10 @@
                                         <td>{{ $subCategory->meta_keywords }}</td>
                                         <td>{{ $subCategory->username }}</td>
                                         <td>{{ $subCategory->status == '0' ? 'Active' : "Inactive" }}</td>
-                                        <td>{{ date('d-m-Y' ,strtotime($subCategory->created_at)) }}</td>
-                                        <td>
+                                        <!-- <td>{{ date('d-m-Y' ,strtotime($subCategory->created_at)) }}</td> -->
+                                        <td style="width: 150px;padding: 0.5rem">
                                             <a href="{{ route('edit-sub_category-layout', $subCategory->id) }}" class="btn btn-primary">Edit</a>
-                                            <a href="{{ route('delete-sub_category', $subCategory->id) }}" class="btn btn-danger" onclick="if(!confirm('Are you sure to delete this admin: {{ $subCategory->name }}')) return false">Delete</a>
+                                            <a href="{{ route('delete-sub_category', $subCategory->id) }}" class="btn btn-danger" onclick="if(!confirm('Are you sure to delete this sub category: {{ $subCategory->name }}')) return false">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach

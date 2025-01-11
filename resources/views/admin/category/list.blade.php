@@ -60,9 +60,9 @@
                                         <td>{{ $category->creator_name }}</td>
                                         <td>{{ $category->status == '0' ? 'Active' : "Inactive" }}</td>
                                         <td>{{ date('d-m-Y', strtotime($category->created_at)) }}</td>
-                                        <td>
+                                        <td style="width: 150px;padding: 0.5rem">
                                             <a href="{{ route('edit-category', $category->id) }}" class="btn btn-primary">Edit</a>
-                                            <a href="{{ route('delete-category', $category->id) }}" class="btn btn-danger" onclick="if(!confirm('Are you sure to delete this admin: {{ $category->name }}')) return false">Delete</a>
+                                            <a href="{{ route('delete-category', $category->id) }}" class="btn btn-danger" onclick="if(!confirm('Are you sure to delete this category: {{ $category->name }}')) return false">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -71,13 +71,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                            </ul>
+                            {{ $categories->links() }}
                         </div>
                     </div>
                     <!-- /.card -->

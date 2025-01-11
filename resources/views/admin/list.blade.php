@@ -38,6 +38,7 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>Name</th>
+                                        <th>Admin</th>
                                         <th>Email</th>
                                         <th>Status</th>
                                         <th style="width: 200px">Actions</th>
@@ -48,6 +49,7 @@
                                     <tr>
                                         <td>{{ $admin->id }}</td>
                                         <td>{{ $admin->name }}</td>
+                                        <td>{{ $admin->is_admin === '1' ? 'Admin' : 'Not Admin' }}</td>
                                         <td>{{ $admin->email }}</td>
                                         <td>{{ $admin->status == 0 ? 'Active' : 'Inactive'}}</td>
                                         <td>
@@ -61,13 +63,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                            </ul>
+                            {{ $admins->links() }}
                         </div>
                     </div>
                     <!-- /.card -->
