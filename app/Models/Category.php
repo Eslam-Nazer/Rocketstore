@@ -4,11 +4,12 @@ namespace App\Models;
 
 use App\Models\Product;
 use App\Models\SubCategory;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Database\Factories\Admin\Category\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
@@ -40,6 +41,15 @@ class Category extends Model
     ];
 
     /**
+     * Summary of newFactory
+     * @return \Database\Factories\Admin\Category\CategoryFactory
+     */
+    protected static function newFactory(): CategoryFactory
+    {
+        return CategoryFactory::new();
+    }
+
+    /**
      * Summary of createdByUser
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -68,17 +78,22 @@ class Category extends Model
 
     /**
      * Summary of getCategories
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public static function getCategories(): Collection
+    public static function getCategories(): LengthAwarePaginator
     {
         return self::select('categories.*', 'users.name as creator_name')
             ->join('users', 'users.id', '=', 'categories.created_by')
             ->orderBy('categories.id', 'desc')
-            ->get();
+            ->paginate(10);
     }
 
-    public static function getCategory(int $id)
+    /**
+     * Summary of getCategory
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public static function getCategory(int $id): Model
     {
         return self::select('categories.*')
             ->where('categories.id', '=', $id)

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use Database\Factories\Admin\Brand\BrandFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -36,6 +37,15 @@ class Brand extends Model
         'meta_keywords',
         'created_by'
     ];
+
+    /**
+     * Summary of newFactory
+     * @return \Database\Factories\Admin\Brand\BrandFactory
+     */
+    protected static function newFactory(): BrandFactory
+    {
+        return BrandFactory::new();
+    }
 
     /**
      * Summary of user

@@ -12,6 +12,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Database\Factories\Admin\SubCategory\SubCategoryFactory;
 
 class SubCategory extends Model
 {
@@ -41,6 +42,15 @@ class SubCategory extends Model
         'created_by',
         'category_id'
     ];
+
+    /**
+     * Summary of newFactory
+     * @return \Database\Factories\Admin\SubCategory\SubCategoryFactory
+     */
+    protected static function newFactory(): SubCategoryFactory
+    {
+        return SubCategoryFactory::new();
+    }
 
     /**
      * Summary of category

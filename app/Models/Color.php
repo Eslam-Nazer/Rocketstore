@@ -5,9 +5,10 @@ namespace App\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Database\Factories\Admin\Color\ColorFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class Color extends Model
 {
@@ -33,6 +34,15 @@ class Color extends Model
         'status',
         'created_by'
     ];
+
+    /**
+     * Summary of newFactory
+     * @return \Database\Factories\Admin\Color\ColorFactory
+     */
+    protected static function newFactory(): ColorFactory
+    {
+        return ColorFactory::new();
+    }
 
     /**
      * Summary of user

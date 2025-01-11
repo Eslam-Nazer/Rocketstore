@@ -3,9 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Color;
 use App\Models\SubCategory;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -83,15 +84,23 @@ class User extends Authenticatable
     }
 
     /**
-     * Summary of getAmind
-     * @return \Illuminate\Database\Eloquent\Collection
+     * Summary of color
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public static function getAminds(): Collection
+    public function color(): BelongsTo
+    {
+        return $this->belongsTo(Color::class, 'created_by', 'id');
+    }
+
+    /**
+     * Summary of getAminds
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public static function getAminds(): LengthAwarePaginator
     {
         return self::select('users.*')
-            ->where('is_admin', '=', '1')
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(10);
     }
 
     /**
