@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Product;
 use Database\Factories\Admin\Brand\BrandFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -45,6 +47,15 @@ class Brand extends Model
     protected static function newFactory(): BrandFactory
     {
         return BrandFactory::new();
+    }
+
+    /**
+     * Summary of product
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product(): BelongsTo
+    {
+        return $this->beLongsTo(Product::class, 'brand_id', 'id');
     }
 
     /**
