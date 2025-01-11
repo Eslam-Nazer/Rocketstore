@@ -3,9 +3,10 @@
 namespace App\Jobs\Admin\Category;
 
 use App\Models\Category;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CategoryStoreJob implements ShouldQueue
 {
@@ -25,10 +26,10 @@ class CategoryStoreJob implements ShouldQueue
      */
     public function handle(): void
     {
-        // dd(Auth::user()->id);
+        $slug = strtolower(trim($this->request['slug']));
         Category::create([
             'name'              => trim($this->request['name']),
-            'slug'              => trim($this->request['slug']),
+            'slug'              => Str::slug($slug),
             'status'            => trim($this->request['status']),
             'meta_title'        => trim($this->request['meta_title']),
             'meta_description'  => trim($this->request['meta_description']),
