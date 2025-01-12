@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Product;
+use App\Enum\StatusEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Database\Factories\Admin\Brand\BrandFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
@@ -88,5 +90,15 @@ class Brand extends Model
     {
         return self::where('id', '=', $id)
             ->firstOrFail();
+    }
+
+    /**
+     * Summary of scopeActive
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', '=', StatusEnum::Active);
     }
 }

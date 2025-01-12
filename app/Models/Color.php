@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Enum\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Database\Factories\Admin\Color\ColorFactory;
@@ -75,5 +77,15 @@ class Color extends Model
         return self::select('colors.*')
             ->where('id', '=', $id)
             ->firstOrFail();
+    }
+
+    /**
+     * Summary of scopeActive
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', '=', StatusEnum::Active);
     }
 }

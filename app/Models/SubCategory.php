@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Enum\StatusEnum;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -95,11 +96,30 @@ class SubCategory extends Model
     /**
      * Summary of getSubCategory
      * @param int $id
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    public static function getSubCategory(int $id)
+    public static function getSubCategory(int $id): Model
     {
         return self::select('sub_categories.*')
             ->where('sub_categories.id', '=', $id)
             ->firstOrFail();
+    }
+
+    /**
+     * Summary of scopeActive
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param array $conditions
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive(Builder $query, array $conditions = []): Builder
+    {
+        if (!empty($conditions)) {
+            foreach ($conditions as $column => $value) {
+                $query->where($column, '=', $value);
+            }
+        }
+
+        $query->where('status', '=', StatusEnum::Active);
+        return $query;
     }
 }

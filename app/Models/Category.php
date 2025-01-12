@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\Product;
+use App\Enum\StatusEnum;
 use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -98,5 +100,15 @@ class Category extends Model
         return self::select('categories.*')
             ->where('categories.id', '=', $id)
             ->firstOrFail();
+    }
+
+    /**
+     * Summary of scopeActive
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', '=', StatusEnum::Active);
     }
 }
