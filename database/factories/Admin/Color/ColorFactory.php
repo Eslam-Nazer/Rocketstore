@@ -41,7 +41,7 @@ class ColorFactory extends Factory
         $user = ($id !== null) ?
             $user::find($id) :
             $user::inRandomOrder()
-            ->where('is_admin', '=', 1)
+            ->where('is_admin', '=', '1')
             ->first();
 
         return $this->state([

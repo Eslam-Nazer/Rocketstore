@@ -50,7 +50,9 @@ class SubCategoryFactory extends Factory
     {
         $user = ($id !== null) ?
             $user::find($id) :
-            $user::inRandomOrder()->first();
+            $user::inRandomOrder()
+            ->where('is_admin', '=', '1')
+            ->first();
         return $this->state([
             'created_by'        => $user->id
         ]);
