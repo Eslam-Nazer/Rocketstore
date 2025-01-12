@@ -42,9 +42,7 @@
                                     <label for="forCategory">Category <span class="text-danger">*</span></label>
                                     <select name="category" class="form-control" id="forCategory">
                                         @foreach ($categories as $category)
-                                        @if ($category->status == '0')
                                         <option {{ old('category') == $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{$category->name}}</option>
-                                        @endif
                                         @endforeach
                                     </select>
                                     <div class="text-danger">{{ $errors->first('category') }}</div>
