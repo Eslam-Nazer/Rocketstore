@@ -52,6 +52,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/sub-category/edit/{id}', [SubCategoryController::class, 'editSubCategory'])->name('edit-sub_category-layout');
     Route::post('/admin/sub-category/edit/{id}', [SubCategoryActionsController::class, 'updateSubCategory'])->name('edit-sub_category');
     Route::get('/admin/sub-category/delete/{id}', [SubCategoryActionsController::class, 'deleteSubCategory'])->name('delete-sub_category');
+    Route::post('/admin/sub_category/ajax', [SubCategoryActionsController::class, 'ajaxGetSubCategory'])->name('sub_category-ajax');
     // Brands
     Route::get('/admin/brands', [BrandController::class, 'brandList'])->name('brand-list');
     Route::get('/admin/brands/list', [BrandController::class, 'brandList'])->name('brand-list');

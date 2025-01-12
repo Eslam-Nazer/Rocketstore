@@ -52,31 +52,24 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="forSubCategory">Sub Category <span class="text-danger">*</span></label>
-                                            <select name="sub_category" class="form-control" id="forSubCategory" required>
-                                                <option selected>Select Sub Category</option>
-                                                @foreach ($sub_categories as $sub_category)
-                                                @if ($sub_category->status === '0')
-                                                <option {{ old('sub_category') == $sub_category->id ? 'selected' : '' }} value="{{$sub_category->id}}">{{$sub_category->name}}</option>
-                                                @endif
+                                            <label for="forCategory">Category <span class="text-danger">*</span></label>
+                                            <select name="category" class="form-control" id="forCategory" required>
+                                                <option selected>Select Category</option>
+                                                @foreach ($categories as $category)
+                                                <option {{ old('category', $product->category_id) == $category->id ? 'selected' : '' }} value="{{$category->id}}">{{$category->name}}</option>
                                                 @endforeach
                                             </select>
-                                            <div class="text-danger">{{ $errors->first('sub_category') }}</div>
+                                            <div class="text-danger">{{ $errors->first('category') }}</div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="forCategory">Category <span class="text-danger">*</span></label>
-                                            <select name="category" class="form-control" id="forCategory" required>
-                                                <option selected>Select Category</option>
-                                                @foreach ($categories as $category)
-                                                @if ($category->status === '0')
-                                                <option {{ old('category') == $category->id ? 'selected' : '' }} value="{{$category->id}}">{{$category->name}}</option>
-                                                @endif
-                                                @endforeach
+                                            <label for="forSubCategory">Sub Category <span class="text-danger">*</span></label>
+                                            <select name="sub_category" class="form-control" id="forSubCategory" required>
+                                                <option selected>Select Sub Category</option>
                                             </select>
-                                            <div class="text-danger">{{ $errors->first('category') }}</div>
+                                            <div class="text-danger">{{ $errors->first('sub_category') }}</div>
                                         </div>
                                     </div>
 
@@ -86,9 +79,7 @@
                                             <select name="brand" class="form-control" id="forBrand" required>
                                                 <option selected>Select Brand</option>
                                                 @foreach ($brands as $brand)
-                                                @if ($brand->status === '0')
-                                                <option {{ old('brand') == $brand->id ? 'selected' : '' }} value="{{$brand->id}}">{{$brand->name}}</option>
-                                                @endif
+                                                <option {{ old('brand', $product->brand_id) == $brand->id ? 'selected' : '' }} value="{{$brand->id}}">{{$brand->name}}</option>
                                                 @endforeach
                                             </select>
                                             <div class="text-danger">{{ $errors->first('brand') }}</div>
@@ -99,8 +90,8 @@
                                         <div class="form-group">
                                             <label for="forStatus">Status <span class="text-danger">*</span></label>
                                             <select name="status" class="form-control" id="forStatus">
-                                                <option {{ $category->status == "0" ? 'selected' : '' }} value="0">Active</option>
-                                                <option {{ $category->status == "1" ? 'selected' : '' }} value="1">Inactive</option>
+                                                <option {{ old('status' ,$product->status) == "0" ? 'selected' : '' }} value="0">Active</option>
+                                                <option {{ old('status' ,$product->status) == "1" ? 'selected' : '' }} value="1">Inactive</option>
                                             </select>
                                             <div class="text-danger">{{ $errors->first('status') }}</div>
                                         </div>
@@ -110,16 +101,14 @@
                                 <div class="row">
                                     <label for="forColor">Color <span class="text-danger">*</span></label>
                                     @foreach ($colors as $color)
-                                    @if ($color->status === '0')
                                     <div class="col-md-12">
                                         <div class="form-check">
-                                            <input name="color[]" value="{{$color->id}}" class="form-check-input" type="checkbox" id="for{{ucfirst(str_replace(" ", "",$color->name))}}">
+                                            <input name="color[{{$color->id}}]" value="{{$color->id}}" class="form-check-input" {{ old("color[$color->id") == $color->id ? 'checked' : '' }} type="checkbox" id="for{{ucfirst(str_replace(" ", "",$color->name))}}">
                                             <label class="form-check-label" for="for{{ucfirst(str_replace(" ", "",$color->name))}}">
                                                 {{ $color->name }}
                                             </label>
                                         </div>
                                     </div>
-                                    @endif
                                     @endforeach
                                 </div>
                                 <hr />
@@ -220,5 +209,25 @@
 @endsection
 
 @section('script')
+<script>
+    $('body').delegate("#forCategory", 'change', function(e) {
+        let id = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "{{ route('sub_category-ajax') }}",
+            data: {
+                "id": id,
+                "_token": "{{csrf_token()}}"
+            },
+            dataType: "json",
+            success: function(data) {
+                $('#forSubCategory').html("<option selected>Select Sub Category</option>");
+                $('#forSubCategory').append(data.html);
+            },
+            error: function(data) {
 
+            }
+        });
+    });
+</script>
 @endsection

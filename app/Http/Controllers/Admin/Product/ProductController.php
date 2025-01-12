@@ -41,10 +41,10 @@ class ProductController extends Controller
     {
         $data['header_title'] = 'Edit product';
         $data['product'] = Product::getProduct($id);
-        $data['sub_categories'] = SubCategory::getSubCategories();
-        $data['categories'] = Category::getCategories();
-        $data['brands'] = Brand::getBrands();
-        $data['colors'] = Color::getColors();
+        // $data['sub_categories'] = SubCategory::active()->get();
+        $data['categories'] = Category::active()->get();
+        $data['brands'] = Brand::active()->get();
+        $data['colors'] = Color::active()->get();
         return view('admin.product.edit', $data);
     }
 }

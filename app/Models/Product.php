@@ -90,7 +90,12 @@ class Product extends Model
             ->paginate('10');
     }
 
-    public static function getProduct(int $id)
+    /**
+     * Summary of getProduct
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public static function getProduct(int $id): Model
     {
         return self::select()
             ->where('products.id', "=", $id)
