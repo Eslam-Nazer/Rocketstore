@@ -24,14 +24,14 @@ class SubCategoryController extends Controller
     public function addSubCategory(): View
     {
         $data['header_title'] = 'Add SubCategory';
-        $data['categories'] = Category::getCategories();
+        $data['categories'] = Category::active()->get();
         return view('admin.sub-category.add', $data);
     }
 
     public function editSubCategory(int $id): View
     {
         $data['header_title']   = 'Edit SubCategory';
-        $data['categories']     = Category::getCategories();
+        $data['categories']     = Category::active()->get();
         $data['sub_category']   = SubCategory::getSubCategory($id);
         return view('admin.sub-category.edit', $data);
     }
