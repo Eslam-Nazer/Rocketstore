@@ -9,11 +9,11 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{url("assest/css/fontawesome/css/all.min.css")}}">
+    <link rel="stylesheet" href="{{url("asset/css/fontawesome/css/all.min.css")}}">
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="{{(url('assest/css/icheck-bootstrap/icheck-bootstrap.min.css'))}}">
+    <link rel="stylesheet" href="{{(url('asset/css/icheck-bootstrap/icheck-bootstrap.min.css'))}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{url('assest/css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{url('asset/css/adminlte.min.css')}}">
 </head>
 
 <body class="hold-transition login-page">
@@ -72,11 +72,11 @@
     <!-- /.login-box -->
 
     <!-- jQuery -->
-    <script src="{{url('assest/js/jquery/jquery.min.js')}}"></script>
+    <script src="{{url('asset/js/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
-    <script src="{{url('assest/js/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{url('asset/js/bootstrap/bootstrap.min.js')}}"></script>
     <!-- AdminLTE App -->
-    <script src="{{url('assest/js/dist/adminlte.min.js')}}"></script>
+    <script src="{{url('asset/js/dist/adminlte.min.js')}}"></script>
 </body>
 
 </html>
