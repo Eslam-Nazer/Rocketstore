@@ -142,14 +142,13 @@
                                                     <th style="width: 150px">Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="appendSize">
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td><input name="" value="" type="text" class="form-control" id="" placeholder="" required></td>
-                                                    <td><input name="" value="" type="text" class="form-control" id="" placeholder="" required></td>
+                                                    <td>0</td>
+                                                    <td><input name="" value="" type="text" class="form-control" id="" placeholder="Name" required></td>
+                                                    <td><input name="" value="" type="text" class="form-control" id="" placeholder="Price" required></td>
                                                     <td>
-                                                        <a href="#" class="btn btn-primary">Add</a>
-                                                        <a href="#" class="btn btn-danger" onclick="if(!confirm('Are you sure to delete this product: {{ $product->title }}')) return false">Delete</a>
+                                                        <button type="button" class="btn btn-primary AddSize">Add</button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -161,7 +160,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="forShortDescription">Short Description <span class="text-danger">*</span></label>
-                                            <textarea name="short_description" class="form-control" id="forShortDescription" placeholder="Type Short Description">{{ $product->short_description }}</textarea>
+                                            <textarea name="short_description" class="form-control editor" id="forShortDescription" placeholder="Type Short Description">{{ $product->short_description }}</textarea>
                                             <div class="text-danger">{{ $errors->first('short_description') }}</div>
                                         </div>
                                     </div>
@@ -169,7 +168,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="forDescription">Description <span class="text-danger">*</span></label>
-                                            <textarea name="description" class="form-control" id="forDescription" placeholder="Type Description">{{ $product->description }}</textarea>
+                                            <textarea name="description" class="form-control editor" id="forDescription" placeholder="Type Description">{{ $product->description }}</textarea>
                                             <div class="text-danger">{{ $errors->first('description') }}</div>
                                         </div>
                                     </div>
@@ -177,7 +176,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="forAdditionalInformation">Additional Information <span class="text-danger">*</span></label>
-                                            <textarea name="additional_information" class="form-control" id="forShortDescription" placeholder="Type Additional Information">{{ $product->additional_information }}</textarea>
+                                            <textarea name="additional_information" class="form-control editor" id="forShortDescription" placeholder="Type Additional Information">{{ $product->additional_information }}</textarea>
                                             <div class="text-danger">{{ $errors->first('additional_information') }}</div>
                                         </div>
                                     </div>
@@ -185,7 +184,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="forShippingReturns">Shipping Returns <span class="text-danger">*</span></label>
-                                            <textarea name="shipping_returns" class="form-control" id="forShippingReturns" placeholder="Type Shipping Returns">{{ $product->shipping_returns }}</textarea>
+                                            <textarea name="shipping_returns" class="form-control editor" id="forShippingReturns" placeholder="Type Shipping Returns">{{ $product->shipping_returns }}</textarea>
                                             <div class="text-danger">{{ $errors->first('shipping_returns') }}</div>
                                         </div>
                                     </div>
@@ -210,6 +209,25 @@
 
 @section('script')
 <script>
+    let i = 1000;
+    $('body').delegate('.AddSize', 'click', function() {
+        let html = "<tr id='DeleteSize" + i + "'>\n\
+                        <td>" + (i - 999) + "</td>\n\
+                        <td><input name='' value='' type='text' class='form-control' id='' placeholder='Name' required></td>\n\
+                        <td><input name='' value='' type='text' class='form-control' id='' placeholder='Price' required></td>\n\
+                        <td>\n\
+                            <button type='button' id='" + i + "' class='btn btn-danger DeleteSize'>Delete</button>\n\
+                        </td>\n\
+                    </tr>";
+        i++;
+        $('#appendSize').append(html);
+    });
+
+    $('body').delegate('.DeleteSize', 'click', function() {
+        let id = $(this).attr('id');
+        $('#DeleteSize' + id).remove();
+    });
+
     $('body').delegate("#forCategory", 'change', function(e) {
         let id = $(this).val();
         $.ajax({
