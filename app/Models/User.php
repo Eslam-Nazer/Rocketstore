@@ -10,6 +10,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -57,39 +58,68 @@ class User extends Authenticatable
     }
 
     /**
-     * Summary of category
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Summary of brand
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function category(): BelongsTo
+    public function brand(): HasMany
     {
-        return $this->belongsTo(Category::class, 'created_by', 'id');
+        return $this->hasMany(
+            Brand::class,
+            'created_by',
+            'id'
+        );
     }
 
     /**
      * Summary of subCategory
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subCategory(): BelongsTo
+    public function subCategory(): HasMany
     {
-        return $this->belongsTo(SubCategory::class, 'created_by', 'id');
+        return $this->hasMany(
+            SubCategory::class,
+            'created_by',
+            'id'
+        );
+    }
+
+    /**
+     * Summary of category
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function category(): HasMany
+    {
+        return $this->hasMany(
+            Category::class,
+            'created_by',
+            'id'
+        );
     }
 
     /**
      * Summary of product
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function product(): BelongsTo
+    public function product(): HasMany
     {
-        return $this->belongsTo(Product::class, 'created_by', 'id');
+        return $this->hasMany(
+            Product::class,
+            'created_by',
+            'id'
+        );
     }
 
     /**
      * Summary of color
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function color(): BelongsTo
+    public function color(): HasMany
     {
-        return $this->belongsTo(Color::class, 'created_by', 'id');
+        return $this->hasMany(
+            Color::class,
+            'created_by',
+            'id'
+        );
     }
 
     /**

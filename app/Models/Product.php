@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
@@ -46,39 +47,68 @@ class Product extends Model
     ];
 
     /**
-     * Summary of brand
+     * Summary of productColor
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function brand(): HasMany
+    public function productColor(): HasMany
     {
-        return $this->hasMany(Brand::class, "brand_id");
+        return $this->hasMany(
+            ProductColor::class,
+            'product_id',
+            'id'
+        );
+    }
+
+    /**
+     * Summary of brand
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(
+            Brand::class,
+            "brand_id",
+            'id'
+        );
     }
 
     /**
      * Summary of subCategory
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function subCategory(): HasMany
+    public function subCategory(): BelongsTo
     {
-        return $this->hasMany(SubCategory::class, 'sub_category_id');
+        return $this->belongsTo(
+            SubCategory::class,
+            'sub_category_id',
+            'id'
+        );
     }
 
     /**
      * Summary of category
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category(): HasMany
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Category::class, 'category_id');
+        return $this->belongsTo(
+            Category::class,
+            'category_id',
+            'id'
+        );
     }
 
     /**
      * Summary of user
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): HasMany
+    public function user(): BelongsTo
     {
-        return $this->hasMany(User::class, 'created_by');
+        return $this->belongsTo(
+            User::class,
+            'created_by',
+            'id'
+        );
     }
 
 

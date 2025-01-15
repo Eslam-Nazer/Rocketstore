@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Database\Factories\Admin\Color\ColorFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Color extends Model
@@ -47,12 +48,29 @@ class Color extends Model
     }
 
     /**
-     * Summary of user
+     * Summary of productColor
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function user(): HasMany
+    public function productColor(): HasMany
     {
-        return $this->hasMany(User::class, 'created_by');
+        return $this->hasMany(
+            ProductColor::class,
+            'color_id',
+            'id'
+        );
+    }
+
+    /**
+     * Summary of user
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(
+            User::class,
+            'created_by',
+            'id'
+        );
     }
 
     /**

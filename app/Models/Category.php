@@ -52,30 +52,41 @@ class Category extends Model
     }
 
     /**
-     * Summary of createdByUser
+     * Summary of product
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function createdByUser(): HasMany
+    public function product(): HasMany
     {
-        return $this->hasMany(User::class, 'created_by');
+        return $this->hasMany(
+            Product::class,
+            'category_id',
+            'id'
+        );
     }
 
     /**
      * Summary of subCategory
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subCategory(): BelongsTo
+    public function subCategory(): HasMany
     {
-        return $this->belongsTo(SubCategory::class, 'category_id', 'id');
+        return $this->hasMany(
+            SubCategory::class,
+            'category_id',
+            'id'
+        );
     }
 
     /**
-     * Summary of product
+     * Summary of user
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function product(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Product::class, 'category_id', 'id');
+        return $this->belongsTo(
+            User::class,
+            'created_by'
+        );
     }
 
     /**

@@ -53,31 +53,44 @@ class SubCategory extends Model
         return SubCategoryFactory::new();
     }
 
-    /**
-     * Summary of category
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function category(): HasMany
-    {
-        return $this->hasMany(Category::class, 'category_id');
-    }
-
-    /**
-     * Summary of createdByUser
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function createdByUser(): HasMany
-    {
-        return $this->hasMany(User::class, 'created_by');
-    }
 
     /**
      * Summary of product
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function product(): HasMany
+    {
+        return $this->hasMany(
+            Product::class,
+            'sub_category_id',
+            'id'
+        );
+    }
+
+    /**
+     * Summary of category
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function product(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(Product::class, 'sub_category_id', 'id');
+        return $this->belongsTo(
+            Category::class,
+            'category_id',
+            'id'
+        );
+    }
+
+    /**
+     * Summary of user
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(
+            User::class,
+            'created_by',
+            'id'
+        );
     }
 
     /**

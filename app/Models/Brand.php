@@ -53,20 +53,27 @@ class Brand extends Model
 
     /**
      * Summary of product
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function product(): BelongsTo
+    public function product(): HasMany
     {
-        return $this->beLongsTo(Product::class, 'brand_id', 'id');
+        return $this->hasMany(
+            Product::class,
+            'brand_id',
+            'id'
+        );
     }
 
     /**
      * Summary of user
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): HasMany
+    public function user(): BelongsTo
     {
-        return $this->hasMany(User::class, 'created_by');
+        return $this->belongsTo(
+            User::class,
+            'created_by'
+        );
     }
 
     /**
