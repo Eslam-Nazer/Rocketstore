@@ -45,8 +45,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="forSKU">SKU <span class="text-danger">*</span></label>
-                                            <input name="sku" value="{{ old('sku',) }}" type="text" class="form-control" id="forSKU" placeholder="Enter A SKU Size" required>
-                                            <div class="text-danger">{{ $errors->first('title') }}</div>
+                                            <input name="sku" value="{{ old('sku', $product->sku) }}" type="text" class="form-control" id="forSKU" placeholder="Enter A SKU Size" required>
+                                            <div class="text-danger">{{ $errors->first('sku') }}</div>
                                         </div>
                                     </div>
 
@@ -68,6 +68,9 @@
                                             <label for="forSubCategory">Sub Category <span class="text-danger">*</span></label>
                                             <select name="sub_category" class="form-control" id="forSubCategory" required>
                                                 <option selected>Select Sub Category</option>
+                                                @foreach ($getSubCategories as $subCategories)
+                                                <option {{ old('sub_category', $product->sub_category_id) == $subCategories->id ? 'selected' : ''}} value="{{$subCategories->id}}">{{$subCategories->name}}</option>
+                                                @endforeach
                                             </select>
                                             <div class="text-danger">{{ $errors->first('sub_category') }}</div>
                                         </div>
@@ -101,9 +104,19 @@
                                 <div class="row">
                                     <label for="forColor">Color <span class="text-danger">*</span></label>
                                     @foreach ($colors as $color)
+                                    @php
+                                    $checked = ''
+                                    @endphp
+                                    @foreach ($product->productColor as $productColor)
+                                    @if ($productColor->color_id == $color->id)
+                                    @php
+                                    $checked = 'checked'
+                                    @endphp
+                                    @endif
+                                    @endforeach
                                     <div class="col-md-12">
                                         <div class="form-check">
-                                            <input name="color[{{$color->id}}]" value="{{$color->id}}" class="form-check-input" {{ old("color[$color->id") == $color->id ? 'checked' : '' }} type="checkbox" id="for{{ucfirst(str_replace(" ", "",$color->name))}}">
+                                            <input name="color[]" value="{{$color->id}}" {{ $checked }} class="form-check-input" {{ old("color[$color->id]") == $color->id ? 'checked' : '' }} type="checkbox" id="for{{ucfirst(str_replace(" ", "",$color->name))}}">
                                             <label class="form-check-label" for="for{{ucfirst(str_replace(" ", "",$color->name))}}">
                                                 {{ $color->name }}
                                             </label>
@@ -192,7 +205,7 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                         </form>
                     </div>
