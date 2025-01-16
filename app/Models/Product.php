@@ -33,6 +33,7 @@ class Product extends Model
      */
     protected $fillable = [
         'title',
+        'sku',
         'slug',
         'price',
         'old_price',
@@ -41,6 +42,7 @@ class Product extends Model
         'additional_information',
         'shipping_returns',
         'status',
+        'brand_id',
         'category_id',
         'sub_category_id',
         'created_by'
