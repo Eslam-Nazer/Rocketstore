@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ProductSize;
 use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -47,6 +48,19 @@ class Product extends Model
         'sub_category_id',
         'created_by'
     ];
+
+    /**
+     * Summary of productSize
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productSize(): HasMany
+    {
+        return $this->hasMany(
+            ProductSize::class,
+            'product_id',
+            'id'
+        );
+    }
 
     /**
      * Summary of productColor

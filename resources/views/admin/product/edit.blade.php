@@ -149,17 +149,30 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 10px">#</th>
                                                     <th>Name</th>
                                                     <th>Price ($)</th>
                                                     <th style="width: 150px">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="appendSize">
+                                                @php
+                                                $iStoredProduct = 1;
+                                                @endphp
+                                                @foreach ($product->productSize()->get() as $productSize)
+                                                <tr id="DeleteSize{{$iStoredProduct}}">
+                                                    <td><input name="size[{{$iStoredProduct}}][name]" value="{{$productSize->size}}" type="text" class="form-control" id="" placeholder="Name"></td>
+                                                    <td><input name="size[{{$iStoredProduct}}][price]" value="{{$productSize->price}}" type="text" class="form-control" id="" placeholder="Price"></td>
+                                                    <td>
+                                                        <button type="button" id="{{$iStoredProduct}}" class="btn btn-danger DeleteSize">Delete</button>
+                                                    </td>
+                                                </tr>
+                                                @php
+                                                $iStoredProduct++
+                                                @endphp
+                                                @endforeach
                                                 <tr>
-                                                    <td>0</td>
-                                                    <td><input name="" value="" type="text" class="form-control" id="" placeholder="Name" required></td>
-                                                    <td><input name="" value="" type="text" class="form-control" id="" placeholder="Price" required></td>
+                                                    <td><input name="size[100][name]" value="" type="text" class="form-control" id="" placeholder="Name"></td>
+                                                    <td><input name="size[100][price]" value="" type="text" class="form-control" id="" placeholder="Price"></td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary AddSize">Add</button>
                                                     </td>
@@ -222,12 +235,11 @@
 
 @section('script')
 <script>
-    let i = 1000;
+    let i = 101;
     $('body').delegate('.AddSize', 'click', function() {
         let html = "<tr id='DeleteSize" + i + "'>\n\
-                        <td>" + (i - 999) + "</td>\n\
-                        <td><input name='' value='' type='text' class='form-control' id='' placeholder='Name' required></td>\n\
-                        <td><input name='' value='' type='text' class='form-control' id='' placeholder='Price' required></td>\n\
+                        <td><input name='size[" + i + "][name]' value='' type='text' class='form-control' id='' placeholder='Name' required></td>\n\
+                        <td><input name='size[" + i + "][price]' value='' type='text' class='form-control' id='' placeholder='Price'></td>\n\
                         <td>\n\
                             <button type='button' id='" + i + "' class='btn btn-danger DeleteSize'>Delete</button>\n\
                         </td>\n\

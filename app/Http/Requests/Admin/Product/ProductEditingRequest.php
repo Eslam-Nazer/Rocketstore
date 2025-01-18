@@ -26,8 +26,8 @@ class ProductEditingRequest extends FormRequest
         return [
             'title'                     => 'required|string|min:3|max:255',
             'sku'                       => 'string',
-            'price'                     => 'numeric|not_in:0,0',
-            'old_price'                 => 'numeric|not_in:0,0',
+            'price'                     => 'numeric|min:0|not_in:0',
+            'old_price'                 => 'numeric|min:0',
             'short_description'         => 'string',
             'description'               => 'string',
             'additional_information'    => 'string',
@@ -40,7 +40,7 @@ class ProductEditingRequest extends FormRequest
             'sub_category'              => 'integer',
             'category'                  => 'integer',
             'color'                     => 'array',
-            'size'                      => '',
+            'size'                      => 'array',
         ];
     }
 }

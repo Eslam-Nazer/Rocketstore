@@ -36,7 +36,12 @@ class ProductController extends Controller
         return view('admin.product.add', $data);
     }
 
-    public function editProduct(int $id)
+    /**
+     * Summary of editProduct
+     * @param int $id
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function editProduct(int $id): View
     {
         $product = Product::getProduct($id);
         $data['header_title'] = 'Edit product';
