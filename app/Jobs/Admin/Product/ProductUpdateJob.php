@@ -3,10 +3,13 @@
 namespace App\Jobs\Admin\Product;
 
 use App\Models\Product;
+use Exception;
 use Illuminate\Support\Str;
 use App\Models\ProductSize;
 use App\Models\ProductColor;
+use App\Models\ProductImage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -16,10 +19,14 @@ class ProductUpdateJob implements ShouldQueue
 
     /**
      * Create a new job instance.
+     * @param array $request
+     * @param int $id
+     * @param array|string|null $images
      */
     public function __construct(
         public array $request,
-        public int $id
+        public int $id,
+        public array|null $images
     ) {}
 
     /**
@@ -124,6 +131,33 @@ class ProductUpdateJob implements ShouldQueue
                         ->where('size', '=', $storedSize)
                         ->where('price', '=', $storedSizePrice)
                         ->forceDelete();
+                }
+            }
+        }
+
+        if (!empty($this->images) && $this->images !== null) {
+            foreach ($this->images as $image) {
+                $storePath = 'storage' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR . $image['basename'];
+                if (
+                    Storage::disk('public')
+                    ->exists(DIRECTORY_SEPARATOR . $image['path'])
+                ) {
+                    Storage::disk('public')
+                        ->move(
+                            DIRECTORY_SEPARATOR . $image['path'],
+                            DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR . $image['basename']
+                        );
+                    ProductImage::create([
+                        'name'          => $image['name'],
+                        'basename'      => $image['basename'],
+                        'extension'     => $image['extension'],
+                        'path'          => $storePath,
+                        'size'          => $image['size'],
+                        'product_id'    => $product->id
+                    ]);
+                    Storage::disk('public')->delete(DIRECTORY_SEPARATOR . $image['path']);
+                } else {
+                    throw new Exception('not move');
                 }
             }
         }

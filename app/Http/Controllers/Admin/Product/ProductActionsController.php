@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Product;
 
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use App\Jobs\Admin\Product\ProductStoreJob;
 use App\Jobs\Admin\Product\ProductUpdateJob;
 use App\Http\Requests\Admin\Product\ProductInfoRequest;
@@ -33,7 +34,22 @@ class ProductActionsController extends Controller
      */
     public function updateProduct(ProductEditingRequest $request, int $id): RedirectResponse
     {
-        ProductUpdateJob::dispatch($request->validated(), $id);
+        $images = $request->validated('images');
+        $validated = Arr::except($request->validated(), ['images']);
+        $imagesData = [];
+        if ($request->hasFile('images')) {
+            foreach ($images as $image) {
+                $path = $image->store('tmp', 'public');
+                $imagesData[] = [
+                    'name'          => $image->getClientOriginalName(),
+                    'basename'      => basename($path),
+                    'extension'     => $image->getClientOriginalExtension(),
+                    'path'          => $path,
+                    'size'          => $image->getSize(),
+                ];
+            }
+        }
+        ProductUpdateJob::dispatch($validated, $id, $imagesData);
         return redirect()
             ->route('products-list')
             ->with('success', 'Product successfully updated');

@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ProductSize;
 use App\Models\SubCategory;
+use App\Models\ProductImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -48,6 +49,19 @@ class Product extends Model
         'sub_category_id',
         'created_by'
     ];
+
+    /**
+     * Summary of productImages
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productImages(): HasMany
+    {
+        return $this->hasMany(
+            ProductImage::class,
+            'product_id',
+            'id'
+        );
+    }
 
     /**
      * Summary of productSize

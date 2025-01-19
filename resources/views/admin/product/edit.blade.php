@@ -30,7 +30,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post">
+                        <form method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -182,7 +182,20 @@
                                     </div>
                                 </div>
 
+                                <hr>
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="formFileMultiple">Upload Images</label>
+                                            <input class="form-control" name="images[]" type="file" id="formFileMultiple" multiple>
+                                            @foreach ($errors->get('images.*') as $imagesErrors)
+                                            @foreach ($imagesErrors as $imagesError)
+                                            <div class="text-danger">{{ $imagesError }}</div>
+                                            @endforeach
+                                            @endforeach
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="forShortDescription">Short Description <span class="text-danger">*</span></label>

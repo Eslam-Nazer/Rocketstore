@@ -41,6 +41,8 @@ class ProductEditingRequest extends FormRequest
             'category'                  => 'integer',
             'color'                     => 'array',
             'size'                      => 'array',
+            'images'                     => "array",
+            'images.*'                   => "image|mimes:png,jpg,jpeg|max:3145728"
         ];
     }
 }
