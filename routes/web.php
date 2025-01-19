@@ -72,9 +72,10 @@ Route::group(['middleware' => 'admin'], function () {
     // Products
     Route::get('/admin/products', [ProductController::class, 'productList'])->name('products-list');
     Route::get('/admin/products/list', [ProductController::class, 'productList'])->name('products-list');
-    Route::get('/admin/products/add', [ProductController::class, 'addProduct'])->name('add-product-layout');
-    Route::post('/admin/products/add', [ProductActionsController::class, 'insertProduct'])->name('add-product');
-    Route::get('/admin/products/edit/{id}', [ProductController::class, 'editProduct'])->name('edit-product-layout');
-    Route::post('/admin/products/edit/{id}', [ProductActionsController::class, 'updateProduct'])->name('edit-product');
+    Route::get('/admin/products/add', [ProductController::class, 'addProduct'])->name('add-product');
+    Route::post('/admin/products/add', [ProductActionsController::class, 'insertProduct'])->name('insert-product');
+    Route::get('/admin/products/edit/{id}', [ProductController::class, 'editProduct'])->name('edit-product');
+    Route::post('/admin/products/edit/{id}', [ProductActionsController::class, 'updateProduct'])->name('update-product');
+    Route::get('/admin/products/edit/{productId}/image/delete/{id}', [ProductActionsController::class, 'deleteProductImage'])->name('delete-product-image');
     Route::get('/admin/products/delete/{id}', [ProductActionsController::class, 'deleteProduct'])->name('delete-product');
 });
