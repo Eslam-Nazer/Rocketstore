@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use Illuminate\Support\Arr;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use App\Jobs\Admin\Product\ProductStoreJob;
 use App\Jobs\Admin\Product\ProductUpdateJob;
 use App\Http\Requests\Admin\Product\ProductInfoRequest;
@@ -53,6 +55,30 @@ class ProductActionsController extends Controller
         return redirect()
             ->route('products-list')
             ->with('success', 'Product successfully updated');
+    }
+
+    /**
+     * Summary of deleteProductImage
+     * @param int $productId
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteProductImage(int $productId, int $id): RedirectResponse
+    {
+        $deleteImage = ProductImage::where('id', "=", $id)
+            ->where('product_id', '=', $productId)
+            ->firstOrFail();
+        $imageExists = Storage::disk('public')
+            ->exists(DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR . $deleteImage->basename);
+        if (!$imageExists) {
+            return redirect()->route('edit-product')
+                ->with('error', 'Some thing wrong but image not deleted');
+        }
+        Storage::disk('public')
+            ->delete(DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'product' . DIRECTORY_SEPARATOR . $deleteImage->basename);
+        $deleteImage->forceDelete();
+        return redirect()->route('edit-product', $productId)
+            ->with('info', 'Image successfully deleted');
     }
 
     public function deleteProduct()
