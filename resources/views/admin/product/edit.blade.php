@@ -6,6 +6,7 @@
 
 @section('content')
 <div class="content-wrapper">
+    @include('admin.layouts._message')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -195,7 +196,25 @@
                                             @endforeach
                                         </div>
                                     </div>
+                                </div>
 
+                                <div class="row">
+                                    @if (!empty($product->productImages) && $product->productImages != null)
+                                    @foreach ($product->productImages as $image)
+                                    <div class="col-md-2">
+                                        <div class="card" style="width: 10rem;">
+                                            <img src="{{ url($image->path) }}" class="card-img-top" alt="{{ $image->name }}">
+                                            <div class="card-body p-2">
+                                                <p class="card-text">{{ $image->name }}</p>
+                                                <a href="{{ route('delete-product-image', [$product->id, $image->id]) }}" class="btn btn-danger btn-sm" onclick="if(!confirm('Are you sure you want delete this image: {{ $image->name }}')) return false" style="display: block;">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    @endif
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="forShortDescription">Short Description <span class="text-danger">*</span></label>

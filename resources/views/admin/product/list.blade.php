@@ -16,7 +16,7 @@
                     <h1>Products</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a href="{{ route('add-product-layout') }}" class="btn btn-primary float-right">New Product</a>
+                    <a href="{{ route('add-product') }}" class="btn btn-primary float-right">New Product</a>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -53,7 +53,7 @@
                                         <td>{{$product->creator_name}}</td>
                                         <td>{{$product->status == "0" ? "Active" : "Inactive"}}</td>
                                         <td>
-                                            <a href="{{ route('edit-product-layout', $product->id) }}" class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('edit-product', $product->id) }}" class="btn btn-primary">Edit</a>
                                             <a href="{{ route('delete-product', $product->id) }}" class="btn btn-danger" onclick="if(!confirm('Are you sure to delete this product: {{ $product->title }}')) return false">Delete</a>
                                         </td>
                                     </tr>
