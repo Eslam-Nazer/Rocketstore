@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Color;
 
+use App\Models\Color;
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Jobs\Admin\Color\ColorStoreJob;
 use App\Jobs\Admin\Color\ColorDeleteJob;
@@ -21,7 +22,15 @@ class ColorActionsController extends Controller
      */
     public function insertColor(ColorInfoRequest $request): RedirectResponse
     {
-        ColorStoreJob::dispatch($request->validated());
+        $validated = $request->validated();
+        extract($validated);
+
+        Color::create([
+            'name'          => trim($name),
+            'code'          => $code,
+            'status'        => $status,
+            'created_by'    => Auth::user()->id
+        ]);
         return redirect()
             ->route('color-list')
             ->with('success', 'Color Successfully created');
@@ -35,7 +44,16 @@ class ColorActionsController extends Controller
      */
     public function updateColor(ColorEditingRequest $request, int $id): RedirectResponse
     {
-        ColorUpdateJob::dispatch($request->validated(), $id);
+        $validated = $request->validated();
+        extract($validated);
+
+        Color::where('id', '=', $id)
+            ->update([
+                'name'          => trim($name),
+                'code'          => $code,
+                'status'        => $status,
+                'created_by'    => Auth::user()->id
+            ]);
         return redirect()->route('color-list')
             ->with('success', 'Color Successfully updated');
     }
@@ -47,7 +65,8 @@ class ColorActionsController extends Controller
      */
     public function deleteColor(int $id): RedirectResponse
     {
-        ColorDeleteJob::dispatch($id);
+        Color::where('id', '=', $id)
+            ->delete();
         return redirect()->route('color-list')
             ->with('info', 'Color Successfully deleted');
     }
