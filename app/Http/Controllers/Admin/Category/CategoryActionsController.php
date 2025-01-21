@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Category;
 
+use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use App\Jobs\Admin\Category\CategoryStoreJob;
-use App\Jobs\Admin\Category\CategoryDeleteJob;
-use App\Jobs\Admin\Category\CategoryUpdateJob;
 use App\Http\Requests\Admin\Category\CategoryInfoRequest;
 use App\Http\Requests\Admin\Category\CategoryEditingRequest;
 
@@ -20,8 +19,19 @@ class CategoryActionsController extends Controller
      */
     public function insertCategory(CategoryInfoRequest $request): RedirectResponse
     {
-        // dd(Auth::user()->id);
-        CategoryStoreJob::dispatch($request->validated());
+        $validated = $request->validated();
+        extract($validated);
+
+        $storeSlug = strtolower(trim($slug));
+        Category::create([
+            'name'              => trim($name),
+            'slug'              => Str::slug($slug),
+            'status'            => trim($status),
+            'meta_title'        => trim($meta_title),
+            'meta_description'  => trim($meta_description),
+            'meta_keywords'     => trim($meta_keywords),
+            'created_by'        => Auth::user()->id,
+        ]);
         return redirect()
             ->route('category-list')
             ->with('success', 'Category successfully saved');
@@ -35,7 +45,18 @@ class CategoryActionsController extends Controller
      */
     public function updateCategory(CategoryEditingRequest $request, int $id): RedirectResponse
     {
-        CategoryUpdateJob::dispatch($request->validated(), $id);
+        $validated = $request->validated();
+        extract($validated);
+        Category::where('id', '=', $id)
+            ->update([
+                'name'              => trim($name),
+                'slug'              => trim($slug),
+                'status'            => trim($status),
+                'meta_title'        => trim($meta_title),
+                'meta_description'  => trim($meta_description),
+                'meta_keywords'     => trim($meta_keywords),
+                'created_by'        => Auth::user()->id
+            ]);
         return redirect()
             ->route('category-list')
             ->with('success', 'Category successfully updated');
@@ -48,7 +69,8 @@ class CategoryActionsController extends Controller
      */
     public function deleteCategory(int $id): RedirectResponse
     {
-        CategoryDeleteJob::dispatch($id);
+        Category::where('id', '=', $id)
+            ->delete();
         return redirect()->route('category-list')
             ->with('info', 'Category successfully deleted!');
     }
