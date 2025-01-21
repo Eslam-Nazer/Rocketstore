@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin\SubCategory;
 
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Jobs\Admin\SubCategory\SubCategoryStoreJob;
 use App\Jobs\Admin\SubCategory\SubCategoryDeleteJob;
@@ -22,7 +23,18 @@ class SubCategoryActionsController extends Controller
      */
     public function insertSubCategory(SubCategoryInfoRequest $request): RedirectResponse
     {
-        SubCategoryStoreJob::dispatch($request->validated());
+        $validated = $request->validated();
+        extract($validated);
+        SubCategory::create([
+            'name'                  => $name,
+            'slug'                  => $slug,
+            'status'                => $status,
+            'meta_title'            => $meta_title,
+            'meta_description'      => $meta_description,
+            'meta_keywords'         => $meta_keywords,
+            'category_id'           => $category,
+            'created_by'            => Auth::user()->id
+        ]);
         return redirect()->route('sub_category-list')
             ->with('success', 'Sub Category successfully instered');
     }
@@ -35,7 +47,20 @@ class SubCategoryActionsController extends Controller
      */
     public function updateSubCategory(SubCategoryEdtingRequest $request, int $id): RedirectResponse
     {
-        SubCategoryUpdateJob::dispatch($request->validated(), $id);
+        // SubCategoryUpdateJob::dispatch($request->validated(), $id);
+        $validated = $request->validated();
+        extract($validated);
+        SubCategory::where('id', '=', $id)
+            ->update([
+                'name'                  => $name,
+                'slug'                  => $slug,
+                'status'                => $status,
+                'meta_title'            => $meta_title,
+                'meta_description'      => $meta_description,
+                'meta_keywords'         => $meta_keywords,
+                'created_by'            => Auth::user()->id,
+                'category_id'           => $category
+            ]);
         return redirect()->route('sub_category-list')
             ->with("success", "Sub Category successfully updated");
     }
@@ -47,7 +72,8 @@ class SubCategoryActionsController extends Controller
      */
     public function deleteSubCategory(int $id): RedirectResponse
     {
-        SubCategoryDeleteJob::dispatch($id);
+        SubCategory::where('id', '=', $id)
+            ->delete();
         return redirect()->route('sub_category-list')
             ->with('info', 'Sub Category successfully deleted');
     }
