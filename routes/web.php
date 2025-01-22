@@ -28,54 +28,56 @@ Route::post('/admin/login', [AuthController::class, 'adminAuth'])->name('admin-a
 Route::get('/admin/logout', [AuthController::class, 'adminLogout'])->name('admin-logout');
 
 Route::group(['middleware' => 'admin'], function () {
-    // Admin
-    Route::get('/admin/dashboard', [LayoutController::class, 'showDashboard'])->name('admin-dashboard');
-    Route::get('/admin/list', [LayoutController::class, 'adminList'])->name('admin-list');
-    Route::get('/admin/add', [LayoutController::class, 'addAdmin'])->name('add-admin-layout');
-    Route::post('/admin/add', [ActionsController::class, 'insertAdmin'])->name('add-admin');
-    Route::get('/admin/edit/{id}', [LayoutController::class, 'editAdmin'])->name('edit-admin');
-    Route::post('/admin/edit/{id}', [ActionsController::class, 'updateAdmin'])->name('update-admin');
-    Route::get('/admin/delete/{id}', [ActionsController::class, 'deleteAdmin'])->name('delete-admin');
-    // Category
-    Route::get('/admin/category', [CategoryController::class, 'categoryList'])->name('category-list');
-    Route::get('/admin/category/list', [CategoryController::class, 'categoryList'])->name('category-list');
-    Route::get('/admin/category/add', [CategoryController::class, 'addCategory'])->name('add-category-layout');
-    Route::post('/admin/category/add', [CategoryActionsController::class, 'insertCategory'])->name('add-category');
-    Route::get('/admin/category/edit/{id}', [CategoryController::class, 'editCategory'])->name('edit-category');
-    Route::post('/admin/category/edit/{id}', [CategoryActionsController::class, 'updateCategory'])->name('update-category');
-    Route::get('/admin/category/delete/{id}', [CategoryActionsController::class, 'deleteCategory'])->name('delete-category');
-    // SubCategory
-    Route::get('/admin/sub-category', [SubCategoryController::class, 'subCategoryList'])->name('sub_category-list');
-    Route::get('/admin/sub-category/list', [SubCategoryController::class, 'subCategoryList'])->name('sub_category-list');
-    Route::get('/admin/sub-category/add', [SubCategoryController::class, 'addSubCategory'])->name('add-sub_category-layout');
-    Route::post('/admin/sub-category/add', [SubCategoryActionsController::class, 'insertSubCategory'])->name('add-sub_category');
-    Route::get('/admin/sub-category/edit/{id}', [SubCategoryController::class, 'editSubCategory'])->name('edit-sub_category-layout');
-    Route::post('/admin/sub-category/edit/{id}', [SubCategoryActionsController::class, 'updateSubCategory'])->name('edit-sub_category');
-    Route::get('/admin/sub-category/delete/{id}', [SubCategoryActionsController::class, 'deleteSubCategory'])->name('delete-sub_category');
-    Route::post('/admin/sub_category/ajax', [SubCategoryActionsController::class, 'ajaxGetSubCategory'])->name('sub_category-ajax');
-    // Brands
-    Route::get('/admin/brands', [BrandController::class, 'brandList'])->name('brand-list');
-    Route::get('/admin/brands/list', [BrandController::class, 'brandList'])->name('brand-list');
-    Route::get('/admin/brands/add', [BrandController::class, 'addBrand'])->name('add-brand');
-    Route::post('/admin/brands/add', [BrandActionsController::class, 'insertBrand'])->name('insert-brand');
-    Route::get('/admin/brands/edit/{id}', [BrandController::class, 'editBrand'])->name('edit-brand');
-    Route::post('/admin/brands/edit/{id}', [BrandActionsController::class, 'updateBrand'])->name('update-brand');
-    Route::get('/admin/brands/delete/{id}', [BrandActionsController::class, 'deleteBrand'])->name('delete-brand');
-    //Colors
-    Route::get('/admin/colors', [ColorController::class, 'colorList'])->name('color-list');
-    Route::get('/admin/colors/list', [ColorController::class, 'colorList'])->name('color-list');
-    Route::get('/admin/colors/add', [ColorController::class, 'addColor'])->name('add-color');
-    Route::post('/admin/colors/add', [ColorActionsController::class, 'insertColor'])->name('insert-color');
-    Route::get('/admin/colors/edit/{id}', [ColorController::class, 'editColor'])->name('edit-color');
-    Route::post('/admin/colors/edit/{id}', [ColorActionsController::class, 'updateColor'])->name('update-color');
-    Route::get('/admin/colors/delete/{id}', [ColorActionsController::class, 'deleteColor'])->name('delete-color');
-    // Products
-    Route::get('/admin/products', [ProductController::class, 'productList'])->name('products-list');
-    Route::get('/admin/products/list', [ProductController::class, 'productList'])->name('products-list');
-    Route::get('/admin/products/add', [ProductController::class, 'addProduct'])->name('add-product');
-    Route::post('/admin/products/add', [ProductActionsController::class, 'insertProduct'])->name('insert-product');
-    Route::get('/admin/products/edit/{id}', [ProductController::class, 'editProduct'])->name('edit-product');
-    Route::post('/admin/products/edit/{id}', [ProductActionsController::class, 'updateProduct'])->name('update-product');
-    Route::get('/admin/products/edit/{productId}/image/delete/{id}', [ProductActionsController::class, 'deleteProductImage'])->name('delete-product-image');
-    Route::get('/admin/products/delete/{id}', [ProductActionsController::class, 'deleteProduct'])->name('delete-product');
+    Route::prefix('admin')->group(function () {
+        // Admin
+        Route::get('dashboard', [LayoutController::class, 'showDashboard'])->name('admin-dashboard');
+        Route::get('list', [LayoutController::class, 'adminList'])->name('admin-list');
+        Route::get('add', [LayoutController::class, 'addAdmin'])->name('add-admin-layout');
+        Route::post('add', [ActionsController::class, 'insertAdmin'])->name('add-admin');
+        Route::get('edit/{id}', [LayoutController::class, 'editAdmin'])->name('edit-admin');
+        Route::post('edit/{id}', [ActionsController::class, 'updateAdmin'])->name('update-admin');
+        Route::get('delete/{id}', [ActionsController::class, 'deleteAdmin'])->name('delete-admin');
+        // Category
+        Route::get('category', [CategoryController::class, 'categoryList'])->name('category-list');
+        Route::get('category/list', [CategoryController::class, 'categoryList'])->name('category-list');
+        Route::get('category/add', [CategoryController::class, 'addCategory'])->name('add-category-layout');
+        Route::post('category/add', [CategoryActionsController::class, 'insertCategory'])->name('add-category');
+        Route::get('category/edit/{id}', [CategoryController::class, 'editCategory'])->name('edit-category');
+        Route::post('category/edit/{id}', [CategoryActionsController::class, 'updateCategory'])->name('update-category');
+        Route::get('category/delete/{id}', [CategoryActionsController::class, 'deleteCategory'])->name('delete-category');
+        // SubCategory
+        Route::get('sub-category', [SubCategoryController::class, 'subCategoryList'])->name('sub_category-list');
+        Route::get('sub-category/list', [SubCategoryController::class, 'subCategoryList'])->name('sub_category-list');
+        Route::get('sub-category/add', [SubCategoryController::class, 'addSubCategory'])->name('add-sub_category-layout');
+        Route::post('sub-category/add', [SubCategoryActionsController::class, 'insertSubCategory'])->name('add-sub_category');
+        Route::get('sub-category/edit/{id}', [SubCategoryController::class, 'editSubCategory'])->name('edit-sub_category-layout');
+        Route::post('sub-category/edit/{id}', [SubCategoryActionsController::class, 'updateSubCategory'])->name('edit-sub_category');
+        Route::get('sub-category/delete/{id}', [SubCategoryActionsController::class, 'deleteSubCategory'])->name('delete-sub_category');
+        Route::post('sub_category/ajax', [SubCategoryActionsController::class, 'ajaxGetSubCategory'])->name('sub_category-ajax');
+        // Brands
+        Route::get('brands', [BrandController::class, 'brandList'])->name('brand-list');
+        Route::get('brands/list', [BrandController::class, 'brandList'])->name('brand-list');
+        Route::get('brands/add', [BrandController::class, 'addBrand'])->name('add-brand');
+        Route::post('brands/add', [BrandActionsController::class, 'insertBrand'])->name('insert-brand');
+        Route::get('brands/edit/{id}', [BrandController::class, 'editBrand'])->name('edit-brand');
+        Route::post('brands/edit/{id}', [BrandActionsController::class, 'updateBrand'])->name('update-brand');
+        Route::get('brands/delete/{id}', [BrandActionsController::class, 'deleteBrand'])->name('delete-brand');
+        //Colors
+        Route::get('colors', [ColorController::class, 'colorList'])->name('color-list');
+        Route::get('colors/list', [ColorController::class, 'colorList'])->name('color-list');
+        Route::get('colors/add', [ColorController::class, 'addColor'])->name('add-color');
+        Route::post('colors/add', [ColorActionsController::class, 'insertColor'])->name('insert-color');
+        Route::get('colors/edit/{id}', [ColorController::class, 'editColor'])->name('edit-color');
+        Route::post('colors/edit/{id}', [ColorActionsController::class, 'updateColor'])->name('update-color');
+        Route::get('colors/delete/{id}', [ColorActionsController::class, 'deleteColor'])->name('delete-color');
+        // Products
+        Route::get('products', [ProductController::class, 'productList'])->name('products-list');
+        Route::get('products/list', [ProductController::class, 'productList'])->name('products-list');
+        Route::get('products/add', [ProductController::class, 'addProduct'])->name('add-product');
+        Route::post('products/add', [ProductActionsController::class, 'insertProduct'])->name('insert-product');
+        Route::get('products/edit/{id}', [ProductController::class, 'editProduct'])->name('edit-product');
+        Route::post('products/edit/{id}', [ProductActionsController::class, 'updateProduct'])->name('update-product');
+        Route::get('products/edit/{productId}/image/delete/{id}', [ProductActionsController::class, 'deleteProductImage'])->name('delete-product-image');
+        Route::get('products/delete/{id}', [ProductActionsController::class, 'deleteProduct'])->name('delete-product');
+    });
 });
