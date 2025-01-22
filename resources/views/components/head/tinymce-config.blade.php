@@ -2,6 +2,7 @@
 <script>
     tinymce.init({
         selector: '.editor',
+        license_key: 'gpl',
         height: 400,
         menubar: false,
         plugins: [

@@ -47,6 +47,8 @@
     <script src="{{url('asset/js/chart.js/Chart.min.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <!-- <script src="{{url('asset/js/dist/demo.js')}}"></script> -->
+    <!-- Sotable jQuery plugin -->
+    <script src="{{ url('asset/js/sortable/jquery-ui.js') }}"></script>
     @yield('script')
 </body>
 
