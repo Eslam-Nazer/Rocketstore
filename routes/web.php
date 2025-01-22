@@ -79,5 +79,6 @@ Route::group(['middleware' => 'admin'], function () {
         Route::post('products/edit/{id}', [ProductActionsController::class, 'updateProduct'])->name('update-product');
         Route::get('products/edit/{productId}/image/delete/{id}', [ProductActionsController::class, 'deleteProductImage'])->name('delete-product-image');
         Route::get('products/delete/{id}', [ProductActionsController::class, 'deleteProduct'])->name('delete-product');
+        Route::post('products/sorting_images', [ProductActionsController::class, 'orderingImages'])->name('ordering_images');
     });
 });

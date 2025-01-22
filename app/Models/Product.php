@@ -60,7 +60,7 @@ class Product extends Model
             ProductImage::class,
             'product_id',
             'id'
-        );
+        )->orderBy('ordering');
     }
 
     /**

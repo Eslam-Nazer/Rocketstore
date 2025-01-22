@@ -222,6 +222,17 @@ class ProductActionsController extends Controller
         //
     }
 
+    public function orderingImages(Request $request)
+    {
+        if (!empty($request->photo_id)) {
+            foreach ($request->photo_id as $sortingImage => $imageId) {
+                $sortImage = ProductImage::find($imageId);
+                $sortImage->ordering = $sortingImage + 1;
+                $sortImage->save();
+            }
+        }
+    }
+
     /**
      * Summary of deleteProductImage
      * @param int $productId

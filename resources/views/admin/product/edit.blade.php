@@ -198,11 +198,11 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    @if (!empty($product->productImages) && $product->productImages != null)
-                                    @foreach ($product->productImages as $image)
-                                    <div class="col-md-2">
-                                        <div class="card" style="width: 10rem;">
+                                @if (!empty($product->productImages()->get()) && $product->productImages() != null)
+                                <div class="row" id="sortable">
+                                    @foreach ($product->productImages()->get() as $image)
+                                    <div class="col-md-2 sortable_image" id="{{ $image->id }}">
+                                        <div class="card" style="width: 10rem; cursor: grab;">
                                             <img src="{{ url($image->path) }}" class="card-img-top" alt="{{ $image->name }}">
                                             <div class="card-body p-2">
                                                 <p class="card-text">{{ $image->name }}</p>
@@ -211,8 +211,8 @@
                                         </div>
                                     </div>
                                     @endforeach
-                                    @endif
                                 </div>
+                                @endif
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -267,6 +267,35 @@
 
 @section('script')
 <script>
+    $(document).ready(function() {
+        $("#sortable").sortable({
+            update: function(event, ui) {
+                let photo_id = new Array();
+                $('.sortable_image').each(function() {
+                    let id = $(this).attr('id')
+                    photo_id.push(id);
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/products/sorting_images",
+                    data: {
+                        'photo_id': photo_id,
+                        "_token": "{{csrf_token()}}"
+                    },
+                    dataType: "json",
+                    success: function(data) {
+
+                    },
+                    error: function(data) {
+
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
     let i = 101;
     $('body').delegate('.AddSize', 'click', function() {
         let html = "<tr id='DeleteSize" + i + "'>\n\
@@ -284,7 +313,8 @@
         let id = $(this).attr('id');
         $('#DeleteSize' + id).remove();
     });
-
+</script>
+<script>
     $('body').delegate("#forCategory", 'change', function(e) {
         let id = $(this).val();
         $.ajax({

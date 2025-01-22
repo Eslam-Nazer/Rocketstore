@@ -26,6 +26,7 @@ class ProductImage extends Model
         'extension',
         'path',
         'size',
+        'ordering',
         'product_id'
     ];
 
