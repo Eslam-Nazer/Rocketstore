@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
-            "version": "v3.0.1",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-dompdf.git",
-                "reference": "d2b3a158ba6e6c0fbb97208aa37dc764642ce5d5"
+                "reference": "8d698b4aec2be91fe1e47ba71ba258acbf23357d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/d2b3a158ba6e6c0fbb97208aa37dc764642ce5d5",
-                "reference": "d2b3a158ba6e6c0fbb97208aa37dc764642ce5d5",
+                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/8d698b4aec2be91fe1e47ba71ba258acbf23357d",
+                "reference": "8d698b4aec2be91fe1e47ba71ba258acbf23357d",
                 "shasum": ""
             },
             "require": {
@@ -69,7 +69,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-dompdf/issues",
-                "source": "https://github.com/barryvdh/laravel-dompdf/tree/v3.0.1"
+                "source": "https://github.com/barryvdh/laravel-dompdf/tree/v3.1.0"
             },
             "funding": [
                 {
@@ -81,7 +81,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-30T10:10:17+00:00"
+            "time": "2025-01-21T20:24:00+00:00"
         },
         {
             "name": "brick/math",
@@ -457,16 +457,16 @@
         },
         {
             "name": "dompdf/dompdf",
-            "version": "v3.0.2",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "baf4084b27c7f4b5b7a221b19a94d11327664eb8"
+                "reference": "a51bd7a063a65499446919286fb18b518177155a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/baf4084b27c7f4b5b7a221b19a94d11327664eb8",
-                "reference": "baf4084b27c7f4b5b7a221b19a94d11327664eb8",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/a51bd7a063a65499446919286fb18b518177155a",
+                "reference": "a51bd7a063a65499446919286fb18b518177155a",
                 "shasum": ""
             },
             "require": {
@@ -515,9 +515,9 @@
             "homepage": "https://github.com/dompdf/dompdf",
             "support": {
                 "issues": "https://github.com/dompdf/dompdf/issues",
-                "source": "https://github.com/dompdf/dompdf/tree/v3.0.2"
+                "source": "https://github.com/dompdf/dompdf/tree/v3.1.0"
             },
-            "time": "2024-12-27T20:27:37+00:00"
+            "time": "2025-01-15T14:09:04+00:00"
         },
         {
             "name": "dompdf/php-font-lib",
@@ -1288,24 +1288,24 @@
         },
         {
             "name": "intervention/gif",
-            "version": "4.2.0",
+            "version": "4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/gif.git",
-                "reference": "42c131a31b93c440ad49061b599fa218f06f93be"
+                "reference": "6addac2c68b4bc0e37d0d3ccedda57eb84729c49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/gif/zipball/42c131a31b93c440ad49061b599fa218f06f93be",
-                "reference": "42c131a31b93c440ad49061b599fa218f06f93be",
+                "url": "https://api.github.com/repos/Intervention/gif/zipball/6addac2c68b4bc0e37d0d3ccedda57eb84729c49",
+                "reference": "6addac2c68b4bc0e37d0d3ccedda57eb84729c49",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.1"
             },
             "require-dev": {
-                "phpstan/phpstan": "^1",
-                "phpunit/phpunit": "^10.0",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^10.0 || ^11.0",
                 "slevomat/coding-standard": "~8.0",
                 "squizlabs/php_codesniffer": "^3.8"
             },
@@ -1336,7 +1336,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/gif/issues",
-                "source": "https://github.com/Intervention/gif/tree/4.2.0"
+                "source": "https://github.com/Intervention/gif/tree/4.2.1"
             },
             "funding": [
                 {
@@ -1352,20 +1352,20 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2024-09-20T13:35:02+00:00"
+            "time": "2025-01-05T10:52:39+00:00"
         },
         {
             "name": "intervention/image",
-            "version": "3.10.2",
+            "version": "3.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "1c68e5fdf443374f3580c5b920a7f177eccdab85"
+                "reference": "6b9ce4fc4485d30117e13935b25bc55a8b894a79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/1c68e5fdf443374f3580c5b920a7f177eccdab85",
-                "reference": "1c68e5fdf443374f3580c5b920a7f177eccdab85",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/6b9ce4fc4485d30117e13935b25bc55a8b894a79",
+                "reference": "6b9ce4fc4485d30117e13935b25bc55a8b894a79",
                 "shasum": ""
             },
             "require": {
@@ -1375,7 +1375,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "^1.6",
-                "phpstan/phpstan": "^2",
+                "phpstan/phpstan": "^2.1",
                 "phpunit/phpunit": "^10.0 || ^11.0",
                 "slevomat/coding-standard": "~8.0",
                 "squizlabs/php_codesniffer": "^3.8"
@@ -1412,7 +1412,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/image/issues",
-                "source": "https://github.com/Intervention/image/tree/3.10.2"
+                "source": "https://github.com/Intervention/image/tree/3.11.0"
             },
             "funding": [
                 {
@@ -1428,20 +1428,20 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2025-01-04T07:31:37+00:00"
+            "time": "2025-01-18T15:42:14+00:00"
         },
         {
             "name": "laravel/framework",
-            "version": "v11.37.0",
+            "version": "v11.39.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "6cb103d2024b087eae207654b3f4b26646119ba5"
+                "reference": "3d693dd36e78121bcd51fc02eda4bc137d2a17f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/6cb103d2024b087eae207654b3f4b26646119ba5",
-                "reference": "6cb103d2024b087eae207654b3f4b26646119ba5",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/3d693dd36e78121bcd51fc02eda4bc137d2a17f2",
+                "reference": "3d693dd36e78121bcd51fc02eda4bc137d2a17f2",
                 "shasum": ""
             },
             "require": {
@@ -1642,20 +1642,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-01-02T20:10:21+00:00"
+            "time": "2025-01-22T17:01:46+00:00"
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.3.2",
+            "version": "v0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "0e0535747c6b8d6d10adca8b68293cf4517abb0f"
+                "reference": "749395fcd5f8f7530fe1f00dfa84eb22c83d94ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/0e0535747c6b8d6d10adca8b68293cf4517abb0f",
-                "reference": "0e0535747c6b8d6d10adca8b68293cf4517abb0f",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/749395fcd5f8f7530fe1f00dfa84eb22c83d94ea",
+                "reference": "749395fcd5f8f7530fe1f00dfa84eb22c83d94ea",
                 "shasum": ""
             },
             "require": {
@@ -1699,9 +1699,9 @@
             "description": "Add beautiful and user-friendly forms to your command-line applications.",
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.3.2"
+                "source": "https://github.com/laravel/prompts/tree/v0.3.3"
             },
-            "time": "2024-11-12T14:59:47+00:00"
+            "time": "2024-12-30T15:53:31+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6335,16 +6335,16 @@
         },
         {
             "name": "tinymce/tinymce",
-            "version": "7.6.0",
+            "version": "7.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "0c4bc43d572ea9673468bf12cc30e8fb556550f4"
+                "reference": "f0b12677418f3cbb2aeffc2216bd36b0590dd418"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/0c4bc43d572ea9673468bf12cc30e8fb556550f4",
-                "reference": "0c4bc43d572ea9673468bf12cc30e8fb556550f4",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/f0b12677418f3cbb2aeffc2216bd36b0590dd418",
+                "reference": "f0b12677418f3cbb2aeffc2216bd36b0590dd418",
                 "shasum": ""
             },
             "type": "component",
@@ -6388,9 +6388,9 @@
                 "wysiwyg"
             ],
             "support": {
-                "source": "https://github.com/tinymce/tinymce-dist/tree/7.6.0"
+                "source": "https://github.com/tinymce/tinymce-dist/tree/7.6.1"
             },
-            "time": "2024-12-11T04:56:37+00:00"
+            "time": "2025-01-22T03:57:00+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -6875,16 +6875,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.19.0",
+            "version": "v1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "8169513746e1bac70c85d6ea1524d9225d4886f0"
+                "reference": "53072e8ea22213a7ed168a8a15b96fbb8b82d44b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/8169513746e1bac70c85d6ea1524d9225d4886f0",
-                "reference": "8169513746e1bac70c85d6ea1524d9225d4886f0",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/53072e8ea22213a7ed168a8a15b96fbb8b82d44b",
+                "reference": "53072e8ea22213a7ed168a8a15b96fbb8b82d44b",
                 "shasum": ""
             },
             "require": {
@@ -6937,20 +6937,20 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2024-12-30T16:20:10+00:00"
+            "time": "2025-01-14T16:20:53+00:00"
         },
         {
             "name": "laravel/sail",
-            "version": "v1.39.1",
+            "version": "v1.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "1a3c7291bc88de983b66688919a4d298d68ddec7"
+                "reference": "237e70656d8eface4839de51d101284bd5d0cf71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/1a3c7291bc88de983b66688919a4d298d68ddec7",
-                "reference": "1a3c7291bc88de983b66688919a4d298d68ddec7",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/237e70656d8eface4839de51d101284bd5d0cf71",
+                "reference": "237e70656d8eface4839de51d101284bd5d0cf71",
                 "shasum": ""
             },
             "require": {
@@ -7000,7 +7000,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-11-27T15:42:28+00:00"
+            "time": "2025-01-13T16:57:11+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -7147,37 +7147,37 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v8.5.0",
+            "version": "v8.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "f5c101b929c958e849a633283adff296ed5f38f5"
+                "reference": "86f003c132143d5a2ab214e19933946409e0cae7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/f5c101b929c958e849a633283adff296ed5f38f5",
-                "reference": "f5c101b929c958e849a633283adff296ed5f38f5",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/86f003c132143d5a2ab214e19933946409e0cae7",
+                "reference": "86f003c132143d5a2ab214e19933946409e0cae7",
                 "shasum": ""
             },
             "require": {
                 "filp/whoops": "^2.16.0",
-                "nunomaduro/termwind": "^2.1.0",
+                "nunomaduro/termwind": "^2.3.0",
                 "php": "^8.2.0",
-                "symfony/console": "^7.1.5"
+                "symfony/console": "^7.2.1"
             },
             "conflict": {
-                "laravel/framework": "<11.0.0 || >=12.0.0",
-                "phpunit/phpunit": "<10.5.1 || >=12.0.0"
+                "laravel/framework": "<11.39.1 || >=13.0.0",
+                "phpunit/phpunit": "<11.5.3 || >=12.0.0"
             },
             "require-dev": {
-                "larastan/larastan": "^2.9.8",
-                "laravel/framework": "^11.28.0",
-                "laravel/pint": "^1.18.1",
-                "laravel/sail": "^1.36.0",
-                "laravel/sanctum": "^4.0.3",
+                "larastan/larastan": "^2.9.12",
+                "laravel/framework": "^11.39.1",
+                "laravel/pint": "^1.20.0",
+                "laravel/sail": "^1.40.0",
+                "laravel/sanctum": "^4.0.7",
                 "laravel/tinker": "^2.10.0",
-                "orchestra/testbench-core": "^9.5.3",
-                "pestphp/pest": "^2.36.0 || ^3.4.0",
+                "orchestra/testbench-core": "^9.9.2",
+                "pestphp/pest": "^3.7.3",
                 "sebastian/environment": "^6.1.0 || ^7.2.0"
             },
             "type": "library",
@@ -7215,6 +7215,7 @@
                 "cli",
                 "command-line",
                 "console",
+                "dev",
                 "error",
                 "handling",
                 "laravel",
@@ -7240,7 +7241,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-10-15T16:06:32+00:00"
+            "time": "2025-01-23T13:41:43+00:00"
         },
         {
             "name": "phar-io/manifest",
