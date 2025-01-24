@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\LayoutController;
 use App\Http\Controllers\Admin\ActionsController;
@@ -15,9 +16,7 @@ use App\Http\Controllers\Admin\SubCategory\SubCategoryController;
 use App\Http\Controllers\Admin\Category\CategoryActionsController;
 use App\Http\Controllers\Admin\SubCategory\SubCategoryActionsController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Admin Area
 Route::get('/admin', [AuthController::class, 'adminLoginView'])->name('admin-login');
