@@ -106,18 +106,12 @@
                                     <label for="forColor">Color <span class="text-danger">*</span></label>
                                     @foreach ($colors as $color)
                                     @php
-                                    $checked = ''
+                                    $isChecked = collect(old('color', $product->productColor->pluck('color_id')->toArray()))->contains($color->id) ? 'checked' : '';
                                     @endphp
-                                    @foreach ($product->productColor as $productColor)
-                                    @if ($productColor->color_id == $color->id)
-                                    @php
-                                    $checked = 'checked'
-                                    @endphp
-                                    @endif
-                                    @endforeach
+
                                     <div class="col-md-12">
                                         <div class="form-check">
-                                            <input name="color[]" value="{{$color->id}}" {{ $checked }} class="form-check-input" {{ old("color[$color->id]") == $color->id ? 'checked' : '' }} type="checkbox" id="for{{ucfirst(str_replace(" ", "",$color->name))}}">
+                                            <input name="color[]" value="{{$color->id}}" {{ $isChecked }} class="form-check-input" {{ old("color[$color->id]") == $color->id ? 'checked' : '' }} type="checkbox" id="for{{ucfirst(str_replace(" ", "",$color->name))}}">
                                             <label class="form-check-label" for="for{{ucfirst(str_replace(" ", "",$color->name))}}">
                                                 {{ $color->name }}
                                             </label>
@@ -172,8 +166,8 @@
                                                 @endphp
                                                 @endforeach
                                                 <tr>
-                                                    <td><input name="size[100][name]" value="" type="text" class="form-control" id="" placeholder="Name"></td>
-                                                    <td><input name="size[100][price]" value="" type="text" class="form-control" id="" placeholder="Price"></td>
+                                                    <td><input name="size[100][name]" value="{{ old('size[100][name]') }}" type="text" class="form-control" id="" placeholder="Name"></td>
+                                                    <td><input name="size[100][price]" value="{{ old('size[100][price]') }}" type="text" class="form-control" id="" placeholder="Price"></td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary AddSize">Add</button>
                                                     </td>
@@ -218,7 +212,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="forShortDescription">Short Description <span class="text-danger">*</span></label>
-                                            <textarea name="short_description" class="form-control editor" id="forShortDescription" placeholder="Type Short Description">{{ $product->short_description }}</textarea>
+                                            <textarea name="short_description" class="form-control editor" id="forShortDescription" placeholder="Type Short Description">{{ old('short_description', $product->short_description) }}</textarea>
                                             <div class="text-danger">{{ $errors->first('short_description') }}</div>
                                         </div>
                                     </div>
@@ -226,7 +220,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="forDescription">Description <span class="text-danger">*</span></label>
-                                            <textarea name="description" class="form-control editor" id="forDescription" placeholder="Type Description">{{ $product->description }}</textarea>
+                                            <textarea name="description" class="form-control editor" id="forDescription" placeholder="Type Description">{{ old('description', $product->description) }}</textarea>
                                             <div class="text-danger">{{ $errors->first('description') }}</div>
                                         </div>
                                     </div>
@@ -234,7 +228,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="forAdditionalInformation">Additional Information <span class="text-danger">*</span></label>
-                                            <textarea name="additional_information" class="form-control editor" id="forShortDescription" placeholder="Type Additional Information">{{ $product->additional_information }}</textarea>
+                                            <textarea name="additional_information" class="form-control editor" id="forShortDescription" placeholder="Type Additional Information">{{ old('additional_information', $product->additional_information) }}</textarea>
                                             <div class="text-danger">{{ $errors->first('additional_information') }}</div>
                                         </div>
                                     </div>
@@ -242,7 +236,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="forShippingReturns">Shipping Returns <span class="text-danger">*</span></label>
-                                            <textarea name="shipping_returns" class="form-control editor" id="forShippingReturns" placeholder="Type Shipping Returns">{{ $product->shipping_returns }}</textarea>
+                                            <textarea name="shipping_returns" class="form-control editor" id="forShippingReturns" placeholder="Type Shipping Returns">{{ old('shipping_returns',$product->shipping_returns) }}</textarea>
                                             <div class="text-danger">{{ $errors->first('shipping_returns') }}</div>
                                         </div>
                                     </div>

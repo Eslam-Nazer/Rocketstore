@@ -30,9 +30,9 @@
                         <a href="#">Links</a>
                         <ul>
                             <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
-                            <li><a href="wishlist.html"><i class="icon-heart-o"></i>My Wishlist <span>(3)</span></a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="#wishlist"><i class="icon-heart-o"></i>My Wishlist <span>(3)</span></a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
                             <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
                         </ul>
                     </li>
@@ -63,10 +63,10 @@
 
                             <div class="megamenu megamenu-md">
                                 <div class="row no-gutters">
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <div class="menu-col">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="menu-title">Shop with sidebar</div><!-- End .menu-title -->
                                                     <ul>
                                                         <li><a href="category-list.html">Shop List</a></li>
@@ -83,7 +83,7 @@
                                                     </ul>
                                                 </div><!-- End .col-md-6 -->
 
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="menu-title">Product Category</div><!-- End .menu-title -->
                                                     <ul>
                                                         <li><a href="product-category-boxed.html">Product Category Boxed</a></li>
@@ -102,17 +102,6 @@
                                         </div><!-- End .menu-col -->
                                     </div><!-- End .col-md-8 -->
 
-                                    <div class="col-md-4">
-                                        <div class="banner banner-overlay">
-                                            <a href="category.html" class="banner banner-menu">
-                                                <img src="{{url("asset/front/assets/images/menu/banner-1.jpg")}}" alt="Banner">
-
-                                                <div class="banner-content banner-content-top">
-                                                    <div class="banner-title text-white">Last <br>Chance<br><span><strong>Sale</strong></span></div><!-- End .banner-title -->
-                                                </div><!-- End .banner-content -->
-                                            </a>
-                                        </div><!-- End .banner banner-overlay -->
-                                    </div><!-- End .col-md-4 -->
                                 </div><!-- End .row -->
                             </div><!-- End .megamenu megamenu-md -->
                         </li>
