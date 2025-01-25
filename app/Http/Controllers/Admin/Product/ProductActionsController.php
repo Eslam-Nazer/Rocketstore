@@ -58,7 +58,10 @@ class ProductActionsController extends Controller
     {
         $images = $request->validated('images');
         $validated = Arr::except($request->validated(), ['images']);
-        extract($validated);
+
+        $sanitized = collect(Arr::except($validated, ['color', 'size']))->map(function ($value) {
+            return e(strip_tags(trim($value)));
+        })->all();
 
         $imagesData = [];
         if ($request->hasFile('images')) {
@@ -74,28 +77,29 @@ class ProductActionsController extends Controller
             }
         }
 
-        $title = e(strip_tags(trim($title)));
-        $slug = Str::slug(strtolower($title));
+        $title = $sanitized['title'];
+        $slug = Str::slug(strtolower($sanitized['title']));
         $product = Product::findOrFail($id);
         $product->update([
             'title'                     => $title,
             'slug'                      => $slug,
-            'sku'                       => e(strip_tags(strtoupper(str_replace(' ', '', trim($sku))))),
-            'price'                     => trim($price),
-            'old_price'                 => trim($old_price) ?? 0,
-            'short_description'         => e(strip_tags(trim($short_description))),
-            'description'               => e(strip_tags(trim($description))),
-            'additional_information'    => e(strip_tags(trim($additional_information))),
-            'shipping_returns'          => e(strip_tags(trim($shipping_returns))),
-            'status'                    => $status,
-            'brand_id'                  => $brand,
-            'sub_category_id'           => $sub_category,
-            'category_id'               => $category,
+            'sku'                       => strtoupper(str_replace(' ', '', $sanitized['sku'])),
+            'price'                     => $sanitized['price'],
+            'old_price'                 => $sanitized['old_price'] ?? 0,
+            'short_description'         => $sanitized['short_description'],
+            'description'               => $sanitized['description'],
+            'additional_information'    => $sanitized['additional_information'],
+            'shipping_returns'          => $sanitized['shipping_returns'],
+            'status'                    => $sanitized['status'],
+            'brand_id'                  => $sanitized['brand'],
+            'sub_category_id'           => $sanitized['sub_category'],
+            'category_id'               => $sanitized['category'],
             'created_by'                => Auth::user()->id,
         ]);
 
         // Color issues
-        if (!empty($color)) {
+        if (!empty($validated['color'])) {
+            $color = $validated['color'];
             $storedColorArr = [];
             $storedColors = ProductColor::where('product_id', '=', $product->id)
                 ->get();
@@ -121,7 +125,8 @@ class ProductActionsController extends Controller
         }
 
         // Size issues
-        if (!empty($size)) {
+        if (!empty($validated['size'])) {
+            $size = $validated['size'];
             $requestSize = [];
             $storedSizeArr = [];
 
