@@ -20,16 +20,15 @@ class ActionsController extends Controller
      */
     public function insertAdmin(AdminInfoRequest $request): RedirectResponse
     {
-        $validated = $request->validated();
-        extract($validated);
+        $validated = $this->sanitizeInputs($request->validated());
 
         $is_admin = '1';
         User::create([
-            'name'          => trim($name),
-            'email'         => trim($email),
-            'password'      => Hash::make($password),
+            'name'          => $validated['name'],
+            'email'         => $validated['email'],
+            'password'      => Hash::make($validated['password']),
             'is_admin'       => $is_admin,
-            'status'        => $status,
+            'status'        => $validated['status'],
             'created_at'    => now()
         ]);
         return redirect()->route('admin-list')
@@ -44,16 +43,16 @@ class ActionsController extends Controller
      */
     public function updateAdmin(AdminEditingRequest $request, int $id): RedirectResponse
     {
-        $validated = $request->validated();
-        extract($validated);
+        $sanitized = $this->sanitizeInputs($request->validated());
 
         $admin          = User::find($id);
-        $admin->name    = trim($name);
-        $admin->email   = trim($email);
-        if (!empty($password) && $password !== null) {
+        $admin->name    = trim($sanitized['name']);
+        $admin->email   = trim($sanitized['email']);
+        if (!empty($sanitized['password']) && $sanitized['password'] !== null) {
+            $password = Hash::make($sanitized['password']);
             $admin->password = $password;
         }
-        $admin->status  = $status;
+        $admin->status  = $sanitized['status'];
         $admin->save();
         return redirect()->route('admin-list')
             ->with('success', 'Admin successfully updated');

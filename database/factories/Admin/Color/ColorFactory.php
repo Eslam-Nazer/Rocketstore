@@ -5,6 +5,7 @@ namespace Database\Factories\Admin\Color;
 use App\Models\Color;
 use App\Enum\StatusEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Color>
@@ -12,6 +13,10 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ColorFactory extends Factory
 {
 
+    /**
+     * Summary of model
+     * @var class-string<\App\Models\Color>
+     */
     protected $model = Color::class;
 
     /**
