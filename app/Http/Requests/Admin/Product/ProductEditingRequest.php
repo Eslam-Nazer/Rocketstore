@@ -24,25 +24,25 @@ class ProductEditingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'                     => 'required|string|min:3|max:255',
-            'sku'                       => 'string',
-            'price'                     => 'numeric|min:0|not_in:0',
-            'old_price'                 => 'numeric|min:0',
-            'short_description'         => 'string',
-            'description'               => 'string',
-            'additional_information'    => 'string',
-            'shipping_returns'          => 'string',
+            'title'                     => ['required', 'string', 'min:3', 'max:255'],
+            'sku'                       => ['string'],
+            'price'                     => ['numeric', 'min:0', 'not_in:0'],
+            'old_price'                 => ['numeric', 'min:0'],
+            'short_description'         => ['string'],
+            'description'               => ['string'],
+            'additional_information'    => ['string'],
+            'shipping_returns'          => ['string'],
             'status'                    => [
                 'required',
                 Rule::enum(StatusEnum::class)
             ],
-            'brand'                     => 'integer',
-            'sub_category'              => 'integer',
-            'category'                  => 'integer',
-            'color'                     => 'array',
-            'size'                      => 'array',
-            'images'                     => "array",
-            'images.*'                   => "image|mimes:png,jpg,jpeg|max:3145728"
+            'brand'                     => ['integer'],
+            'sub_category'              => ['integer'],
+            'category'                  => ['integer'],
+            'color'                     => ['array'],
+            'size'                      => ['array'],
+            'images'                    => ['array'],
+            'images.*'                  => ["image", "mimes:png,jpg,jpeg", "max:20480"]
         ];
     }
 }

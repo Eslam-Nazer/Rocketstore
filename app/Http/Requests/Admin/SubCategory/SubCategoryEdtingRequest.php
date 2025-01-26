@@ -25,16 +25,16 @@ class SubCategoryEdtingRequest extends FormRequest
     {
         $id = $this->route('id');
         return [
-            'name'              => "required|string|max:255|unique:sub_categories,name,{$id}",
-            'slug'              => "required|string|max:255|unique:sub_categories,slug,{$id}",
+            'name'              => ["required", "string", "max:255", "unique:sub_categories,name,{$id}"],
+            'slug'              => ["required", "string", "max:255", "unique:sub_categories,slug,{$id}"],
             'status'            => [
                 'required',
-                Rule::in(array_column(StatusEnum::cases(), 'value'))
+                Rule::enum(StatusEnum::class),
             ],
-            'meta_title'        => 'string|max:255',
-            'meta_description'  => 'string|max:255',
-            'meta_keywords'     => 'string|max:255',
-            'category'          => 'required|integer',
+            'meta_title'        => ['string', 'max:255'],
+            'meta_description'  => ['string', 'max:255'],
+            'meta_keywords'     => ['string', 'max:255'],
+            'category'          => ['required', 'integer'],
         ];
     }
 }

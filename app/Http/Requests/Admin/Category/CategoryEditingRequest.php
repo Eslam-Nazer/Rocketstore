@@ -25,15 +25,15 @@ class CategoryEditingRequest extends FormRequest
     {
         $id = $this->route('id');
         return [
-            'name'              => "required|string|unique:categories,name,{$id}",
-            'slug'              => "required|string|unique:categories,slug,{$id}",
+            'name'              => ["required", "string", 'min:3', 'max:255', "unique:categories,name,{$id}"],
+            'slug'              => ["required", "string", 'min:3', 'max:255', "unique:categories,slug,{$id}"],
             'status'            => [
                 "required",
-                Rule::in(array_column(StatusEnum::cases(), 'value')),
+                Rule::enum(StatusEnum::class),
             ],
-            'meta_title'        => 'max:255',
-            'meta_description'  => '',
-            'meta_keywords'     => 'max:255'
+            'meta_title'        => ['string', 'max:255'],
+            'meta_description'  => ['string', 'max:5000'],
+            'meta_keywords'     => ['string', 'max:255']
         ];
     }
 }

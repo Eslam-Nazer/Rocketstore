@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use App\Enum\StatusEnum;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminInfoRequest extends FormRequest
@@ -24,9 +25,17 @@ class AdminInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'      => 'required|string',
-            'email'     => 'required|email|unique:users,email',
-            'password'  => 'required',
+            'name'      => ['required', 'string'],
+            'email'     => ['required', 'email', 'unique:users,email'],
+            'password'  => [
+                'required',
+                'string',
+                Password::min(8)
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols(),
+                // TODO: Confirm password
+            ],
             'status'    => [
                 'required',
                 Rule::in(array_column(StatusEnum::cases(), 'value')),

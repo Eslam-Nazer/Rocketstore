@@ -24,16 +24,16 @@ class SubCategoryInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'              => 'required|string|max:255|unique:sub_categories,name',
-            'slug'              => 'required|string|max:255|unique:sub_categories,slug',
+            'name'              => ['required', 'string', 'min:3', 'max:255', 'unique:sub_categories,name'],
+            'slug'              => ['required', 'string', 'min:3', 'max:255', 'unique:sub_categories,slug'],
             'status'            => [
                 'required',
-                Rule::in(array_column(StatusEnum::cases(), 'value'))
+                Rule::enum(StatusEnum::class),
             ],
-            'meta_title'        => 'string|max:255',
-            'meta_description'  => 'string|max:255',
-            'meta_keywords'     => 'string|max:255',
-            'category'          => 'required|integer',
+            'meta_title'        => ['string', 'max:255'],
+            'meta_description'  => ['string', 'max:255'],
+            'meta_keywords'     => ['string', 'max:255'],
+            'category'          => ['required', 'integer'],
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use App\Enum\StatusEnum;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminEditingRequest extends FormRequest
@@ -25,12 +26,20 @@ class AdminEditingRequest extends FormRequest
     {
         $userId = $this->route('id');
         return [
-            'name'          => 'required|string',
-            'email'         => "required|email|unique:users,email,{$userId}",
+            'name'          => ['required', 'string', 'min:3', 'max:255'],
+            'email'         => ["required", "email", "unique:users,email,{$userId}"],
+            'password'      => [
+                'nullable',
+                'string',
+                Password::min(8)
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols(),
+            ],
             'status'        => [
                 'required',
-                Rule::in(array_column(StatusEnum::cases(), 'value'))
-            ]
+                Rule::enum(StatusEnum::class),
+            ],
         ];
     }
 }

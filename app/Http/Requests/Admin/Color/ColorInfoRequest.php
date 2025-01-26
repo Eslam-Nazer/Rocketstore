@@ -24,8 +24,8 @@ class ColorInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => 'required|string|min:3|max:255|unique:colors,name',
-            'code'          => 'required|string|min:7|max:7',
+            'name'          => ['required', 'string', 'min:3', 'max:255', 'unique:colors,name'],
+            'code'          => ['required', 'string', 'min:7', 'max:7', 'hex_color'],
             'status'        => [
                 'required',
                 Rule::enum(StatusEnum::class)

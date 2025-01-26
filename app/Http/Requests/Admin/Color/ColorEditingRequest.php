@@ -25,8 +25,8 @@ class ColorEditingRequest extends FormRequest
     {
         $id = $this->route('id');
         return [
-            'name'      => "required|string|min:3|max:255|unique:colors,name,{$id}",
-            'code'      => "required|string|min:7|max:7",
+            'name'      => ["required", "string", "min:3", "max:255", "unique:colors,name,{$id}"],
+            'code'      => ["required", "string", "min:7", "max:7", "hex_color"],
             'status'    => [
                 'required',
                 Rule::enum(StatusEnum::class)

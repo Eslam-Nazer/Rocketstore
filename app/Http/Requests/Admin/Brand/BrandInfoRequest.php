@@ -24,15 +24,15 @@ class BrandInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'              => 'required|string|max:255',
-            'slug'              => 'required|string|max:255|unique:brands,slug',
-            'status'           => [
+            'name'              => ['required', 'string', 'min:3', 'max:255'],
+            'slug'              => ['required', 'string', 'min:3', 'max:255', 'unique:brands,slug'],
+            'status'            => [
                 'required',
-                Rule::in(array_column(StatusEnum::cases(), 'value'))
+                Rule::enum(StatusEnum::class),
             ],
-            'meta_title'        => 'string|max:255',
-            'meta_description'  => 'string',
-            'meta_keywords'     => 'string|max:255'
+            'meta_title'        => ['string', 'max:255'],
+            'meta_description'  => ['string', 'max:5000'],
+            'meta_keywords'     => ['string', 'max:255']
         ];
     }
 }
