@@ -27,7 +27,7 @@ class AdminEditingRequest extends FormRequest
         $userId = $this->route('id');
         return [
             'name'          => ['required', 'string', 'min:3', 'max:255'],
-            'email'         => ["required", "email", "unique:users,email,{$userId}"],
+            'email'         => ["required", Rule::email()->rfcCompliant(false)->validateMxRecord(), "unique:users,email,{$userId}"],
             'password'      => [
                 'nullable',
                 'string',

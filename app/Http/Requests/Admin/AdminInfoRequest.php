@@ -26,7 +26,7 @@ class AdminInfoRequest extends FormRequest
     {
         return [
             'name'      => ['required', 'string'],
-            'email'     => ['required', 'email', 'unique:users,email'],
+            'email'     => ['required', Rule::email()->rfcCompliant()->validateMxRecord(), 'unique:users,email'],
             'password'  => [
                 'required',
                 'string',
