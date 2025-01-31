@@ -136,8 +136,12 @@ class Category extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeActive(Builder $query): Builder
+    public function scopeActive(Builder $query, array $conditions = []): Builder
     {
+        if (filled($conditions)) {
+            $query->where([$conditions]);
+        }
+
         return $query->where('status', '=', StatusEnum::Active);
     }
 }

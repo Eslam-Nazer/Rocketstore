@@ -139,10 +139,8 @@ class SubCategory extends Model
      */
     public function scopeActive(Builder $query, array $conditions = []): Builder
     {
-        if (!empty($conditions)) {
-            foreach ($conditions as $column => $value) {
-                $query->where($column, '=', $value);
-            }
+        if (filled($conditions)) {
+            $query->where([$conditions]);
         }
 
         $query->where('status', '=', StatusEnum::Active);
