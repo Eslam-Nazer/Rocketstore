@@ -46,7 +46,7 @@ class ProductController extends Controller
         $product = Product::getProduct($id);
         $data['header_title'] = 'Edit product';
         $data['product'] = $product;
-        $data['getSubCategories'] = SubCategory::active(['category_id' => $product->category_id])->get();
+        $data['getSubCategories'] = SubCategory::active(['category_id', '=', $product->category_id])->get();
         $data['categories'] = Category::active()->get();
         $data['brands'] = Brand::active()->get();
         $data['colors'] = Color::active()->get();
