@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController as FrontProductController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\LayoutController;
 use App\Http\Controllers\Admin\ActionsController;
@@ -16,7 +17,10 @@ use App\Http\Controllers\Admin\SubCategory\SubCategoryController;
 use App\Http\Controllers\Admin\Category\CategoryActionsController;
 use App\Http\Controllers\Admin\SubCategory\SubCategoryActionsController;
 
+// User Area
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/products/{slug?}', [FrontProductController::class, 'categories'])->name('products-categories-list');
 
 // Admin Area
 Route::get('/admin', [AuthController::class, 'adminLoginView'])->name('admin-login');
