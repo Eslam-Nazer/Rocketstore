@@ -69,10 +69,10 @@
                                             <div class="row">
                                                 @foreach ($activeCategories as $category)
                                                 <div class="col-md-4">
-                                                    <div class="menu-title"><a href="{{ $category->slug }}">{{ $category->name }}</a></div><!-- End .menu-title -->
+                                                    <div class="menu-title"><a href="{{ url('products' . '/' . $category->slug) }}">{{ $category->name }}</a></div><!-- End .menu-title -->
                                                     <ul>
                                                         @forelse ($category->subCategory as $subCategory)
-                                                        <li><a href="{{$category->slug . '/' . $subCategory->slug}}">{{$subCategory->name}}</a></li>
+                                                        <li><a href="{{ url('products' . '/' . $category->slug . '/' . $subCategory->slug) }}">{{$subCategory->name}}</a></li>
                                                         @empty
                                                         <li><a>{{ "not subcategory found" }}</a></li>
                                                         @endforelse
