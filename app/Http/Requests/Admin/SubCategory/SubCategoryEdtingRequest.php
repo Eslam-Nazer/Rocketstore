@@ -26,7 +26,6 @@ class SubCategoryEdtingRequest extends FormRequest
         $id = $this->route('id');
         return [
             'name'              => ["required", "string", "max:255", "unique:sub_categories,name,{$id}"],
-            'slug'              => ["required", "string", "max:255", "unique:sub_categories,slug,{$id}"],
             'status'            => [
                 'required',
                 Rule::enum(StatusEnum::class),

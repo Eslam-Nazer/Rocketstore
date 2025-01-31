@@ -27,7 +27,6 @@ class SubCategoryActionsController extends Controller
         extract($validated);
         SubCategory::create([
             'name'                  => $name,
-            'slug'                  => $slug,
             'status'                => $status,
             'meta_title'            => $meta_title,
             'meta_description'      => $meta_description,
@@ -50,17 +49,16 @@ class SubCategoryActionsController extends Controller
         // SubCategoryUpdateJob::dispatch($request->validated(), $id);
         $validated = $request->validated();
         extract($validated);
-        SubCategory::where('id', '=', $id)
-            ->update([
-                'name'                  => $name,
-                'slug'                  => $slug,
-                'status'                => $status,
-                'meta_title'            => $meta_title,
-                'meta_description'      => $meta_description,
-                'meta_keywords'         => $meta_keywords,
-                'created_by'            => Auth::user()->id,
-                'category_id'           => $category
-            ]);
+        $subCategory = SubCategory::find($id);
+        $subCategory->update([
+            'name'                  => $name,
+            'status'                => $status,
+            'meta_title'            => $meta_title,
+            'meta_description'      => $meta_description,
+            'meta_keywords'         => $meta_keywords,
+            'created_by'            => Auth::user()->id,
+            'category_id'           => $category
+        ]);
         return redirect()->route('sub_category-list')
             ->with("success", "Sub Category successfully updated");
     }

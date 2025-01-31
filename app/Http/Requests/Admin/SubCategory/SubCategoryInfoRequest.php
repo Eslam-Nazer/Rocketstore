@@ -25,7 +25,6 @@ class SubCategoryInfoRequest extends FormRequest
     {
         return [
             'name'              => ['required', 'string', 'min:3', 'max:255', 'unique:sub_categories,name'],
-            'slug'              => ['required', 'string', 'min:3', 'max:255', 'unique:sub_categories,slug'],
             'status'            => [
                 'required',
                 Rule::enum(StatusEnum::class),

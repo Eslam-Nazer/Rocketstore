@@ -6,6 +6,7 @@ use App\Enum\StatusEnum;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +23,18 @@ class SubCategory extends Model
      * @use SoftDeletes<\Database\Eloquent\SoftDeletes>
      */
     use HasFactory, SoftDeletes;
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($subCategory) {
+            $subCategory->slug = Str::slug($subCategory->name);
+        });
+
+        static::updating(function ($subCategory) {
+            $subCategory->slug = Str::slug($subCategory->name);
+        });
+    }
 
     /**
      * Summary of table

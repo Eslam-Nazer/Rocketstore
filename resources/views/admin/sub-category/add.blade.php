@@ -48,11 +48,6 @@
                                     <div class="text-danger">{{ $errors->first('category') }}</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="forSlug">Slug <span class="text-danger">*</span></label>
-                                    <input name="slug" value="{{ old('slug') }}" type="text" class="form-control" id="forSlug" placeholder="Slug Ex. URL" required>
-                                    <div class="text-danger">{{ $errors->first('slug') }}</div>
-                                </div>
-                                <div class="form-group">
                                     <label for="forStatus">Status <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control" id="forStatus">
                                         <option {{ old('status') == 0 ? 'selected' : '' }} value="0">Active</option>
