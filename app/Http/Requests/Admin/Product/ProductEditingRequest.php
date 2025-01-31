@@ -23,8 +23,9 @@ class ProductEditingRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('id');
         return [
-            'title'                     => ['required', 'string', 'min:3', 'max:255'],
+            'title'                     => ['required', 'string', 'min:3', 'max:255', "unique:products,title,{$id}"],
             'sku'                       => ['string'],
             'price'                     => ['numeric', 'min:0', 'not_in:0'],
             'old_price'                 => ['numeric', 'min:0'],

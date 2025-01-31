@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ProductSize;
 use App\Models\SubCategory;
+use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +23,22 @@ class Product extends Model
      * @use SoftDeletes<\Database\Eloquent\SoftDeletes>
      */
     use HasFactory, SoftDeletes;
+
+    /**
+     * Summary of boot
+     * @return void
+     */
+    public static function boot(): void
+    {
+        parent::boot();
+        static::creating(function ($product) {
+            $product->slug = Str::slug($product->title);
+        });
+
+        static::updating(function ($product) {
+            $product->slug = Str::slug($product->title);
+        });
+    }
 
     /**
      * Summary of table

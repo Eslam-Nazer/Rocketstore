@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Product;
 
 use App\Models\Product;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use App\Models\ProductSize;
 use App\Models\ProductColor;
 use App\Models\ProductImage;
@@ -26,24 +25,13 @@ class ProductActionsController extends Controller
      */
     public function insertProduct(ProductInfoRequest $request): RedirectResponse
     {
-        $validated = $request->validated();
-        extract($validated);
+        $validated = $this->sanitizeInputs($request->validated());
 
-        $title = trim($title);
-        $product = Product::create([
-            'title'     => $title,
+        Product::create([
+            'title'     => $validated['title'],
             'created_by'   => Auth::user()->id
         ]);
 
-        $slug  = Str::slug($title);
-        $slugExists = Product::where('slug', '=', $slug)->exists();
-        if ($slugExists) {
-            $slug = Str::slug("{$title} {$product->id} " . rand(000, 999));
-        }
-        Product::where('id', '=', $product->id)
-            ->update([
-                'slug'      => $slug
-            ]);
         return redirect()->route('products-list')
             ->with('success', 'Product successfully created');
     }
@@ -77,12 +65,9 @@ class ProductActionsController extends Controller
             }
         }
 
-        $title = $sanitized['title'];
-        $slug = Str::slug(strtolower($sanitized['title']));
         $product = Product::findOrFail($id);
         $product->update([
-            'title'                     => $title,
-            'slug'                      => $slug,
+            'title'                     => $sanitized['title'],
             'sku'                       => strtoupper(str_replace(' ', '', $sanitized['sku'])),
             'price'                     => $sanitized['price'],
             'old_price'                 => $sanitized['old_price'] ?? 0,
