@@ -5,13 +5,14 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Product;
 use App\Enum\StatusEnum;
-use Illuminate\Database\Eloquent\Builder;
-use Database\Factories\Admin\Brand\BrandFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Database\Factories\Admin\Brand\BrandFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Brand extends Model
@@ -21,6 +22,18 @@ class Brand extends Model
      * @use SoftDeletes<\Database\Eloquent\SoftDeletes>
      */
     use HasFactory, SoftDeletes;
+
+    public static function boot(): void
+    {
+        parent::boot();
+        static::creating(function ($brand) {
+            $brand->slug = Str::slug($brand->name);
+        });
+
+        static::updating(function ($brand) {
+            $brand->slug = Str::slug($brand->name);
+        });
+    }
 
     /**
      * Summary of table

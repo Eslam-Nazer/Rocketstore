@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Admin\Brand;
 
 use App\Models\Brand;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use App\Jobs\Admin\Brand\BrandStoreJob;
-use App\Jobs\Admin\Brand\BrandDeleteJob;
-use App\Jobs\Admin\Brand\BrandUpdateJob;
 use App\Http\Requests\Admin\Brand\BrandInfoRequest;
 use App\Http\Requests\Admin\Brand\BrandEditingRequest;
 
@@ -23,16 +19,14 @@ class BrandActionsController extends Controller
      */
     public function insertBrand(BrandInfoRequest $request): RedirectResponse
     {
-        $validated = $request->validated();
-        extract($validated);
-        $slug = strtolower(trim($slug));
+        $validated = $this->sanitizeInputs($request->validated());
+
         Brand::create([
-            'name'              => trim($name),
-            'slug'              => Str::slug($slug),
-            'status'            => $status,
-            'meta_title'        => trim($meta_title),
-            'meta_description'  => trim($meta_description),
-            'meta_keywords'     => trim($meta_keywords),
+            'name'              => $validated['name'],
+            'status'            => $validated['status'],
+            'meta_title'        => $validated['meta_title'],
+            'meta_description'  => $validated['meta_description'],
+            'meta_keywords'     => $validated['meta_keywords'],
             'created_by'        => Auth::user()->id
         ]);
         return redirect()->route('brand-list')
@@ -47,20 +41,17 @@ class BrandActionsController extends Controller
      */
     public function updateBrand(BrandEditingRequest $request, int $id): RedirectResponse
     {
-        $validated = $request->validated();
-        extract($validated);
+        $validated = $this->sanitizeInputs($request->validated());
 
-        $slug = strtolower(trim($slug));
-        Brand::where('id', '=', $id)
-            ->update([
-                'name'          => trim($name),
-                'slug'          => Str::slug($slug),
-                'status'        => $status,
-                'meta_title'        => trim($meta_title),
-                'meta_description'  => trim($meta_description),
-                'meta_keywords'     => trim($meta_keywords),
-                'created_by'        => Auth::user()->id
-            ]);
+        $brand = Brand::find($id);
+        $brand->update([
+            'name'              => $validated['name'],
+            'status'            => $validated['status'],
+            'meta_title'        => $validated['meta_title'],
+            'meta_description'  => $validated['meta_description'],
+            'meta_keywords'     => $validated['meta_keywords'],
+            'created_by'        => Auth::user()->id
+        ]);
         return redirect()->route('brand-list')
             ->with('success', 'Brand Successfully updated');
     }

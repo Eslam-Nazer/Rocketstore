@@ -25,8 +25,7 @@ class BrandEditingRequest extends FormRequest
     {
         $id = $this->route('id');
         return [
-            'name'          => ['required', 'string', 'min:2', 'max:255'],
-            'slug'          => ["required", "string", 'min:2', "max:255", "unique:brands,slug,{$id}"],
+            'name'          => ['required', 'string', 'min:2', 'max:255', "unique:brands,name,{$id}"],
             'status'        => [
                 'required',
                 Rule::enum(StatusEnum::class),

@@ -24,8 +24,7 @@ class BrandInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'              => ['required', 'string', 'min:3', 'max:255'],
-            'slug'              => ['required', 'string', 'min:3', 'max:255', 'unique:brands,slug'],
+            'name'              => ['required', 'string', 'min:3', 'max:255', "unique:brands,name"],
             'status'            => [
                 'required',
                 Rule::enum(StatusEnum::class),
