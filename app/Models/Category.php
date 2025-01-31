@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Product;
 use App\Enum\StatusEnum;
+use Illuminate\Support\Str;
 use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,6 +22,23 @@ class Category extends Model
      * @use SoftDeletes<\Database\Eloquent\SoftDeletes>
      */
     use HasFactory, SoftDeletes;
+
+    /**
+     * Summary of boot
+     * @return void
+     */
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function ($category) {
+            $category->slug = Str::slug($category->name);
+        });
+
+        static::updating(function ($category) {
+            $category->slug = Str::slug($category->name);
+        });
+    }
 
     /**
      * Summary of table

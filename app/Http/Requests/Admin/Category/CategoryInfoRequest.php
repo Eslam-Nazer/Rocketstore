@@ -25,7 +25,6 @@ class CategoryInfoRequest extends FormRequest
     {
         return [
             'name'              => 'required|string|unique:categories,name|max:255',
-            'slug'              => 'required|string|unique:categories,slug|max:255',
             'status'            => [
                 'required',
                 Rule::in(array_column(StatusEnum::cases(), 'value'))

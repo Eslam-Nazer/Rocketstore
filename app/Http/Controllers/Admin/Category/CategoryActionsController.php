@@ -19,17 +19,14 @@ class CategoryActionsController extends Controller
      */
     public function insertCategory(CategoryInfoRequest $request): RedirectResponse
     {
-        $validated = $request->validated();
-        extract($validated);
+        $validated = $this->sanitizeInputs($request->validated());
 
-        $storeSlug = strtolower(trim($slug));
         Category::create([
-            'name'              => trim($name),
-            'slug'              => Str::slug($slug),
-            'status'            => trim($status),
-            'meta_title'        => trim($meta_title),
-            'meta_description'  => trim($meta_description),
-            'meta_keywords'     => trim($meta_keywords),
+            'name'              => $validated['name'],
+            'status'            => $validated['status'],
+            'meta_title'        => $validated['meta_title'],
+            'meta_description'  => $validated['meta_description'],
+            'meta_keywords'     => $validated['meta_keywords'],
             'created_by'        => Auth::user()->id,
         ]);
         return redirect()
@@ -45,18 +42,17 @@ class CategoryActionsController extends Controller
      */
     public function updateCategory(CategoryEditingRequest $request, int $id): RedirectResponse
     {
-        $validated = $request->validated();
-        extract($validated);
-        Category::where('id', '=', $id)
-            ->update([
-                'name'              => trim($name),
-                'slug'              => trim($slug),
-                'status'            => trim($status),
-                'meta_title'        => trim($meta_title),
-                'meta_description'  => trim($meta_description),
-                'meta_keywords'     => trim($meta_keywords),
-                'created_by'        => Auth::user()->id
-            ]);
+        $validated = $this->sanitizeInputs($request->validated());
+
+        $category = Category::find($id);
+        $category->update([
+            'name'              => $validated['name'],
+            'status'            => $validated['status'],
+            'meta_title'        => $validated['meta_title'],
+            'meta_description'  => $validated['meta_description'],
+            'meta_keywords'     => $validated['meta_keywords'],
+            'created_by'        => Auth::user()->id
+        ]);
         return redirect()
             ->route('category-list')
             ->with('success', 'Category successfully updated');
