@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use App\Jobs\Admin\Color\ColorStoreJob;
-use App\Jobs\Admin\Color\ColorDeleteJob;
-use App\Jobs\Admin\Color\ColorUpdateJob;
 use App\Http\Requests\Admin\Color\ColorInfoRequest;
 use App\Http\Requests\Admin\Color\ColorEditingRequest;
 
@@ -22,13 +19,12 @@ class ColorActionsController extends Controller
      */
     public function insertColor(ColorInfoRequest $request): RedirectResponse
     {
-        $validated = $request->validated();
-        extract($validated);
+        $validated = $this->sanitizeInputs($request->validated());
 
         Color::create([
-            'name'          => trim($name),
-            'code'          => $code,
-            'status'        => $status,
+            'name'          => $validated['name'],
+            'code'          => $validated['code'],
+            'status'        => $validated['status'],
             'created_by'    => Auth::user()->id
         ]);
         return redirect()
@@ -44,16 +40,15 @@ class ColorActionsController extends Controller
      */
     public function updateColor(ColorEditingRequest $request, int $id): RedirectResponse
     {
-        $validated = $request->validated();
-        extract($validated);
+        $validated = $this->sanitizeInputs($request->validated());
 
-        Color::where('id', '=', $id)
-            ->update([
-                'name'          => trim($name),
-                'code'          => $code,
-                'status'        => $status,
-                'created_by'    => Auth::user()->id
-            ]);
+        $color = Color::find($id);
+        $color->update([
+            'name'          => $validated['name'],
+            'code'          => $validated['code'],
+            'status'        => $validated['status'],
+            'created_by'    => Auth::user()->id
+        ]);
         return redirect()->route('color-list')
             ->with('success', 'Color Successfully updated');
     }
